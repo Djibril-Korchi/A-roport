@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 11 mars 2024 à 15:02
+-- Généré le : lun. 11 mars 2024 à 15:33
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -29,10 +29,11 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `avion`;
 CREATE TABLE IF NOT EXISTS `avion` (
-  `id_avion` int(11) NOT NULL,
+  `id_avion` int(11) NOT NULL AUTO_INCREMENT,
   `matricule` varchar(50) NOT NULL,
   `compagnie` varchar(50) NOT NULL,
-  `nb_place` int(11) NOT NULL
+  `nb_place` int(11) NOT NULL,
+  PRIMARY KEY (`id_avion`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -57,11 +58,12 @@ CREATE TABLE IF NOT EXISTS `lier` (
 
 DROP TABLE IF EXISTS `repos`;
 CREATE TABLE IF NOT EXISTS `repos` (
-  `id_repos` int(11) NOT NULL,
+  `id_repos` int(11) NOT NULL AUTO_INCREMENT,
   `date_debut` date NOT NULL,
   `date_fin` date NOT NULL,
   `nb_repos` int(11) NOT NULL,
   `ref_user` int(11) NOT NULL,
+  PRIMARY KEY (`id_repos`),
   KEY `fk_repos_user` (`ref_user`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -73,18 +75,27 @@ CREATE TABLE IF NOT EXISTS `repos` (
 
 DROP TABLE IF EXISTS `reservation`;
 CREATE TABLE IF NOT EXISTS `reservation` (
-  `id_reseration` int(11) NOT NULL,
-  `heure_arriver` datetime NOT NULL,
-  `heure_depart` datetime NOT NULL,
-  `destination` text NOT NULL,
-  `ville_depart` varchar(50) NOT NULL,
+  `id_reseration` int(11) NOT NULL AUTO_INCREMENT,
   `nb_place` int(11) NOT NULL,
-  `date` date NOT NULL,
   `classe` varchar(50) NOT NULL,
   `ref_user` int(11) NOT NULL,
   `ref_vol` int(11) NOT NULL,
+  PRIMARY KEY (`id_reseration`),
   KEY `fk_reservation_vol` (`ref_vol`),
   KEY `fk_reservation_user` (`ref_user`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `status`
+--
+
+DROP TABLE IF EXISTS `status`;
+CREATE TABLE IF NOT EXISTS `status` (
+  `id_status` int(11) NOT NULL AUTO_INCREMENT,
+  `libelle` varchar(50) NOT NULL,
+  PRIMARY KEY (`id_status`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -95,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `reservation` (
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
-  `id_user` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) NOT NULL,
   `prenom` varchar(50) NOT NULL,
   `daten` date NOT NULL,
@@ -103,7 +114,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `ville` varchar(50) NOT NULL,
   `cp` varchar(6) NOT NULL,
   `mdp` varchar(50) NOT NULL,
-  `status` varchar(50) NOT NULL
+  `ref_status` int(11) NOT NULL,
+  PRIMARY KEY (`id_user`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -114,14 +126,15 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 DROP TABLE IF EXISTS `vol`;
 CREATE TABLE IF NOT EXISTS `vol` (
-  `id_vol` int(11) NOT NULL,
+  `id_vol` int(11) NOT NULL AUTO_INCREMENT,
   `destination` varchar(50) NOT NULL,
   `heure_depart` datetime NOT NULL,
   `heure_arriver` datetime NOT NULL,
   `ville_depart` varchar(50) NOT NULL,
-  `classe` varchar(50) NOT NULL,
+  `nb_place` int(11) NOT NULL,
   `prix` int(11) NOT NULL,
   `ref_avion` int(11) NOT NULL,
+  PRIMARY KEY (`id_vol`),
   KEY `fk_vol_avion` (`ref_avion`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 COMMIT;
