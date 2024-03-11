@@ -9,7 +9,7 @@ class User{
     private $prenom;
     private $email;
     private $daten;
-    private $rue;
+    private $adresse;
     private $ville;
     private $cp;
     private $mdp;
@@ -61,9 +61,9 @@ class User{
     /**
      * @return mixed
      */
-    public function getRue()
+    public function getAdresse()
     {
-        return $this->rue;
+        return $this->adresse;
     }
 
     /**
@@ -123,7 +123,7 @@ class User{
                 'p'=>$this->getPrenom(),
                 'e'=>$this->getEmail(),
                 'd'=>$this->getDaten(),
-                'r'=>$this->getRue(),
+                'r'=>$this->getAdresse(),
                 'v'=>$this->getVille(),
                 'cp'=>$this->getCp(),
                 'mdp'=>$this->getMdp(),
@@ -161,7 +161,7 @@ class User{
             "age" =>$this->getDaten(),
             "prenom" =>$this->getPrenom(),
             "nom" =>$this->getNom(),
-            "rue"=>$this->getRue(),
+            "rue"=>$this->getAdresse(),
             "cp"=>$this->getCp(),
             "ville"=>$this->getVille(),
             "mdp"=>$this->getMdp(),
