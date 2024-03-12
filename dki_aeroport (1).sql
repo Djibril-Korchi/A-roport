@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : dim. 10 mars 2024 à 15:09
+-- Généré le : lun. 11 mars 2024 à 08:59
 -- Version du serveur : 8.2.0
 -- Version de PHP : 8.2.13
 
@@ -98,8 +98,11 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id_user` int NOT NULL,
   `nom` varchar(50) NOT NULL,
   `prenom` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `daten` date NOT NULL,
+  `rue` text NOT NULL,
   `ville` varchar(50) NOT NULL,
+  `cp` varchar(6) NOT NULL,
   `mdp` varchar(50) NOT NULL,
   `status` varchar(50) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

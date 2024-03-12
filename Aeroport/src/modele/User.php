@@ -106,6 +106,86 @@ class User{
         return $this->email;
     }
 
+    /**
+     * @param mixed $idUser
+     */
+    public function setIdUser($idUser)
+    {
+        $this->idUser = $idUser;
+    }
+
+    /**
+     * @param mixed $nom
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+    }
+
+    /**
+     * @param mixed $prenom
+     */
+    public function setPrenom($prenom)
+    {
+        $this->prenom = $prenom;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @param mixed $daten
+     */
+    public function setDaten($daten)
+    {
+        $this->daten = $daten;
+    }
+
+    /**
+     * @param mixed $rue
+     */
+    public function setRue($rue)
+    {
+        $this->rue = $rue;
+    }
+
+    /**
+     * @param mixed $ville
+     */
+    public function setVille($ville)
+    {
+        $this->ville = $ville;
+    }
+
+    /**
+     * @param mixed $cp
+     */
+    public function setCp($cp)
+    {
+        $this->cp = $cp;
+    }
+
+    /**
+     * @param mixed $mdp
+     */
+    public function setMdp($mdp)
+    {
+        $this->mdp = $mdp;
+    }
+
+    /**
+     * @param mixed $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
     public function inscription(){
 
         $bdd = new Bdd();
@@ -143,7 +223,8 @@ class User{
         if (is_array($res)){
             $this->setNom($res["nom"]);
             $this->setPrenom($res["prenom"]);
-            $this->setDate($res["age"]);
+            $this->setDaten($res["daten"]);
+
             session_start();
 
             $_SESSION["user"] = $this;
