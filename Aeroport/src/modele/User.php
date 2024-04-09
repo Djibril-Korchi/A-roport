@@ -3,16 +3,8 @@ namespace modele;
 
 use Bdd;
 
-class User{
-    private $idUser;
-    private $nom;
-    private $prenom;
-    private $email;
-    private $daten;
-    private $adresse;
-    private $ville;
-    private $cp;
-    private $mdp;
+class User extends Perssone {
+    private $id_user;
     private $status;
     public function __construct(array $donnees){
         $this->hydrate($donnees);
@@ -37,147 +29,18 @@ class User{
     /**
      * @return mixed
      */
-    public function getNom()
-    {
-        return $this->nom;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPrenom()
-    {
-        return $this->prenom;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDaten()
-    {
-        return $this->daten;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAdresse()
-    {
-        return $this->adresse;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getVille()
-    {
-        return $this->ville;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCp()
-    {
-        return $this->cp;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMdp()
-    {
-        return $this->mdp;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getStatus()
     {
         return $this->status;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
     /**
      * @param mixed $idUser
      */
+
     public function setIdUser($idUser)
     {
         $this->idUser = $idUser;
     }
-
-    /**
-     * @param mixed $nom
-     */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
-    }
-
-    /**
-     * @param mixed $prenom
-     */
-    public function setPrenom($prenom)
-    {
-        $this->prenom = $prenom;
-    }
-
-    /**
-     * @param mixed $email
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-    /**
-     * @param mixed $daten
-     */
-    public function setDaten($daten)
-    {
-        $this->daten = $daten;
-    }
-
-    /**
-     * @param mixed $rue
-     */
-    public function setRue($rue)
-    {
-        $this->rue = $rue;
-    }
-
-    /**
-     * @param mixed $ville
-     */
-    public function setVille($ville)
-    {
-        $this->ville = $ville;
-    }
-
-    /**
-     * @param mixed $cp
-     */
-    public function setCp($cp)
-    {
-        $this->cp = $cp;
-    }
-
-    /**
-     * @param mixed $mdp
-     */
-    public function setMdp($mdp)
-    {
-        $this->mdp = $mdp;
-    }
-
     /**
      * @param mixed $status
      */
@@ -224,7 +87,6 @@ class User{
             $this->setNom($res["nom"]);
             $this->setPrenom($res["prenom"]);
             $this->setDaten($res["daten"]);
-            $this->setA
             session_start();
 
             $_SESSION["user"] = $this;
@@ -236,7 +98,7 @@ class User{
 
     public function editer(){
         $bdd = new Bdd();
-        $req = $bdd->getBdd()->prepare('UPDATE User SET nom=:nom,prenom=:prenom,daten=:age,email=:email,rue=:rue,ville=:ville,cp=:cp,mdp=:mdp,status=:status WHERE id_user=:id_user');
+        $req = $bdd->getBdd()->prepare('UPDATE user SET nom=:nom,prenom=:prenom,daten=:age,email=:email,rue=:rue,ville=:ville,cp=:cp,mdp=:mdp,status=:status WHERE id_user=:id_user');
         $res = $req->execute(array(
             "email" =>$this->getEmail(),
             "age" =>$this->getDaten(),
@@ -258,7 +120,7 @@ class User{
     }
     public function supprimer(){
         $bdd = new Bdd();
-        $req = $bdd->getBdd()->prepare('DELETE FROM User WHERE id_user=:id_user');
+        $req = $bdd->getBdd()->prepare('DELETE FROM user WHERE id_user=:id_user');
         $res = $req->execute(array(
             "id_user" =>$this->getIdUser(),
         ));
