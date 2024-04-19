@@ -46,7 +46,7 @@ class User extends Perssone {
         if ($verif){
             header("Location: ../../vue/inscription.html");
         }else{
-            $inscription=$bdd->getBdd()->query("INSERT INTO user(nom,prenom,email,daten,rue,ville,cp,mdp_provisoire,status) VALUES (:n,:p,:e,:d,:r,:v,:cp,:mdp,:s)");
+            $inscription=$bdd->getBdd()->prepare("INSERT INTO user(id_user,nom,prenom,email,daten,rue,ville,cp,mdp_provisoire,status) VALUES (:id,:n,:p,:e,:d,:r,:v,:cp,:mdp,:s)");
             $inscription->execute(array(
                 'n'=>$this->getNom(),
                 'p'=>$this->getPrenom(),

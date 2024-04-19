@@ -217,4 +217,10 @@ class Vol{
         ));
         header("Location: ../../vue/connection.html");
     }
+    public function getVol(){
+        $bdd = new Bdd();
+        $req=$bdd->getBdd()->query("SELECT * FROM vol");
+        $vol=$req->fetchAll();
+        return $vol;
+    }
 }

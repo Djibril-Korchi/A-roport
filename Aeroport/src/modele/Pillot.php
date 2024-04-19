@@ -5,7 +5,8 @@ namespace modele;
 class Pillot extends Perssone {
     private $id_pillot;
     private $ref_compagnie;
-    private $re_user;
+    private static $ref_user;
+
     public function __construct(array $donnees){
         $this->hydrate($donnees);
     }
@@ -43,6 +44,22 @@ class Pillot extends Perssone {
     }
 
     /**
+     * @return mixed
+     */
+    public static function getRefUser()
+    {
+        return self::$ref_user;
+    }
+
+    /**
+     * @param mixed $ref_user
+     */
+    public static function setRefUser($ref_user)
+    {
+        self::$ref_user = $ref_user;
+    }
+
+    /**
      * @param mixed $ref_compagnie
      */
     public function setRefCompagnie($ref_compagnie)
@@ -54,7 +71,7 @@ class Pillot extends Perssone {
     public function inscription(){
 
         $bdd = new Bdd();
-        $req=$bdd->getBdd()->prepare("SELECT * FROM pillot WHERE email=:email");
+        $req=$bdd->getBdd()->prepare("SELECT * FROM user WHERE email=:email");
         $req->execute(array(
             'email'=>$this->getEmail()
         ));
@@ -76,28 +93,32 @@ class Pillot extends Perssone {
                 "mdpp"=>$this->getMdpProvisoire(),
                 "ref"=>$this->getRefCompagnie()
             ));
-            $inscription=$bdd->getBdd()->query("INSERT INTO pillot(nom,prenom,email,daten,addresse,ville,cp,mdp,nb_repos,mdp_provisoire,ref_compagnie) VALUES (:n,:p,:e,:d,:r,:v,:cp,:mdp,:nb,mdpp,:ref)");
-            $inscription->execute(array(
-                'n'=>$this->getNom(),
-                'p'=>$this->getPrenom(),
-                'e'=>$this->getEmail(),
-                'd'=>$this->getDaten(),
-                'r'=>$this->getAdresse(),
-                'v'=>$this->getVille(),
-                'cp'=>$this->getCp(),
-                'mdp'=>$this->getMdp(),
-                "nb"=>30,
-                "mdpp"=>$this->getMdpProvisoire(),
-                "ref"=>$this->getRefCompagnie()
+
+            $id=$bdd->getBdd()->prepare("SELECT id_user FROM user  WHERE email=:email");
+            $id->execute(array(
+                'email'=>$this->getEmail()
+            ));
+            $reqid=$id->fetchAll();
+            $id1=$bdd->getBdd()->prepare("SELECT c.id_compagnie FROM compagnie as c INNER JOIN user as u ON c.ref_user = u.id_user WHERE u.email=:email");
+            $id1->execute(array(
+                'email'=>$this->getRefCompagnie()
+            ));
+            $reqid1=$id1->fechAll();
+            Pillot::setRefUser($reqid['id_user']);
+            $req=$bdd->getBdd()->prepare("INSERT INTO pillot(ref_compagnie, ref_user) VALUES (:ref_c,:ref_u)");
+            $req->execute(array(
+                'ref_c'=>$reqid1['id_compagnie'],
+                'ref_u'=>$reqid['id_user']
             ));
             header("Location: ../../vue/connection.html");
         }
     }
     public function connexion(){
         $bdd = new Bdd();
-        $req = $bdd->getBdd()->prepare('SELECT * FROM pillot WHERE email=:email and mdp=:mdp or mdp_provisoir=:mdp_p');
+        $req = $bdd->getBdd()->prepare('SELECT * FROM user WHERE status=:s AND email=:e AND mdp=:mdp or mdp_provisoire=:mdp_p');
         $req->execute(array(
-            "email" =>$this->getEmail(),
+            "s"=>"pillot",
+            "e" =>$this->getEmail(),
             "mdp" =>$this->getMdp(),
             "mdp_p" =>$this->getMdp()
         ));
@@ -115,7 +136,7 @@ class Pillot extends Perssone {
 
             $_SESSION["user"] = $this;
             header("Location: ../../vue/accueil.php");
-        }elseif (is_array(res[$res["mdp_provisoir"])){
+        }elseif (is_array($res["mdp_provisoir"])){
             header("Location: ../../vue/setMdp.php");
         }
         else{
@@ -125,7 +146,7 @@ class Pillot extends Perssone {
 
     public function editer(){
         $bdd = new Bdd();
-        $req = $bdd->getBdd()->prepare('UPDATE pillot SET nom=:n,prenom=:p,email=:e,daten=:d,rue=:r,ville=:v,cp=:cp,mdp=:mdp,nb_repos=:nb,mdp_provisoire=:mdpp,ref_compagnie=:ref WHERE id_pillot=:id_pillot');
+        $req = $bdd->getBdd()->prepare('UPDATE user SET nom=:n,prenom=:p,email=:e,daten=:d,rue=:r,ville=:v,cp=:cp,mdp=:mdp WHERE id_user=:id');
         $res = $req->execute(array(
             'n'=>$this->getNom(),
             'p'=>$this->getPrenom(),
@@ -135,10 +156,7 @@ class Pillot extends Perssone {
             'v'=>$this->getVille(),
             'cp'=>$this->getCp(),
             'mdp'=>$this->getMdp(),
-            "nb"=>30,
-            "mdpp"=>$this->getMdpProvisoire(),
-            "ref"=>$this->getRefCompagnie(),
-            "id_pillot"=>$this->getIdPillot()
+            "id"=>Pillot::getRefUser()
         ));
 
         if ($res){
@@ -149,9 +167,13 @@ class Pillot extends Perssone {
     }
     public function supprimer(){
         $bdd = new Bdd();
-        $req = $bdd->getBdd()->prepare('DELETE FROM pillot WHERE id_pillot=:id_pillot');
+        $req0 = $bdd->getBdd()->prepare('DELETE FROM pillot WHERE id_pillot=:id_pillot');
+        $res0 = $req0->execute(array(
+            "id_pillot" =>$this->getIdPillot()
+        ));
+        $req = $bdd->getBdd()->prepare('DELETE FROM user WHERE id_user=:id_user');
         $res = $req->execute(array(
-            "id_pillot" =>$this->getIdPillot(),
+            "id_user" =>Pillot::getRefUser()
         ));
 
         if ($res){
@@ -160,15 +182,13 @@ class Pillot extends Perssone {
             header("Location: ../../vue/connexion.php");
         }
     }
-    public function vacance(){
+    public function getVolPillot(){
         $bdd = new Bdd();
-        $req = $bdd->getBdd()->prepare('UPDATE pillot SET date_debut=:date_debut, date_in=:date_fin, nb_repos=nb_repos-:nb WHERE id_pillot=:id_pillot');
-        $res = $req->execute(array(
-            "date_debut"=>$this->getDateDebut(),
-            "date_fin"=>$this->getDateFin(),
-            "nb"=>$this->getNbRepos(),
-            "id_pillot" =>$this->getIdPillot(),
+        $req=$bdd->getBdd()->query("SELECT * FROM vol WHERE ref_pillot = :ref");
+        $req->execute(array(
+            "ref"=>$this->getIdPillot()
         ));
+        $vol=$req->fetchAll();
+        return $vol;
     }
-
 }

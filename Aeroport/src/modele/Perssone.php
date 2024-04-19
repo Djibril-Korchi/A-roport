@@ -85,13 +85,14 @@ class Perssone
     {
         return $this->mdp_provisoire;
     }
-
-    /**
-     * @param mixed $mdp_provisoire
-     */
-    public function setMdp($mdp )
-    {
-
+    public function setMdp($mdp_p,$mdp){
+        $bdd = new Bdd();
+        $req=$bdd->getBdd()->prepare("UPDATE user SET mdp_provisoire=:mdp_p and mdp=:mdp where mdp_provisoire=:mdp_provisoire");
+        $req->execute(array(
+            'mdp_p'=>"MotDePasseNonValable",
+            'mdp'=>$mdp,
+            'mdp_provisoire'=>$mdp_p
+        ));
     }
 
 
