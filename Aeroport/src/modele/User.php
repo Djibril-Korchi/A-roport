@@ -4,7 +4,7 @@ namespace modele;
 use Bdd;
 
 class User extends Perssone {
-    private $id_user;
+    private static $id_user;
     private $status;
     public function __construct(array $donnees){
         $this->hydrate($donnees);
@@ -21,14 +21,23 @@ class User extends Perssone {
     /**
      * @return mixed
      */
-    public function getIdUser()
+    public static function getIdUser()
     {
-        return $this->id_user;
+        return self::$id_user;
+    }
+
+    /**
+     * @param mixed $id_user
+     */
+    public static function setIdUser($id_user)
+    {
+        self::$id_user = $id_user;
     }
 
     /**
      * @return mixed
      */
+
     public function getStatus()
     {
         return $this->status;
@@ -63,6 +72,12 @@ class User extends Perssone {
     }
     public function connexion(){
         $bdd = new Bdd();
+        $req1=$bdd->getBdd()->prepare("SELECT id_user FROM user WHERE email=:email");
+        $req1->execute(array(
+            'email'=>$this->getEmail()
+        ));
+        $id=$req1->fetchAll();
+        User::setIdUser($req1['id_user']);
         $req = $bdd->getBdd()->prepare('SELECT * FROM `user` WHERE email=:email and mdp=:mdp');
         $req->execute(array(
             "email" =>$this->getEmail(),
@@ -119,5 +134,14 @@ class User extends Perssone {
         }else{
             header("Location: ../../vue/connexion.php");
         }
+    }
+    public function reservation(){
+        $bdd = new Bdd();
+        $req = $bdd->getBdd()->prepare('SELECT * FROM reservation WHERE ref_user = :id_user');
+        $req->execute(array(
+            'id_user'=>User::getIdUser()
+        ));
+        $reservation=$req->fetchAll();
+        return $reservation;
     }
 }

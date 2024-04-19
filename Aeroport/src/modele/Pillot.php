@@ -88,10 +88,8 @@ class Pillot extends Perssone {
                 'r'=>$this->getAdresse(),
                 'v'=>$this->getVille(),
                 'cp'=>$this->getCp(),
-                'mdp'=>$this->getMdp(),
-                "nb"=>30,
-                "mdpp"=>$this->getMdpProvisoire(),
-                "ref"=>$this->getRefCompagnie()
+                'mdp_p'=>$this->getMdp(),
+                'status'=>"pillot"
             ));
 
             $id=$bdd->getBdd()->prepare("SELECT id_user FROM user  WHERE email=:email");
@@ -105,10 +103,11 @@ class Pillot extends Perssone {
             ));
             $reqid1=$id1->fechAll();
             Pillot::setRefUser($reqid['id_user']);
-            $req=$bdd->getBdd()->prepare("INSERT INTO pillot(ref_compagnie, ref_user) VALUES (:ref_c,:ref_u)");
+            $req=$bdd->getBdd()->prepare("INSERT INTO pillot(ref_compagnie, ref_user,nb_repos) VALUES (:ref_c,:ref_u,:nb_repos)");
             $req->execute(array(
                 'ref_c'=>$reqid1['id_compagnie'],
-                'ref_u'=>$reqid['id_user']
+                'ref_u'=>$reqid['id_user'],
+                'nb_repos'=>30
             ));
             header("Location: ../../vue/connection.html");
         }
@@ -123,7 +122,9 @@ class Pillot extends Perssone {
             "mdp_p" =>$this->getMdp()
         ));
         $res = $req->fetch();
+
         if (is_array($res["mdp"])){
+            Pillot::setRefUser($res['id_user']);
             $this->setNom($res["nom"]);
             $this->setPrenom($res["prenom"]);
             $this->setDaten($res["daten"]);
