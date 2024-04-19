@@ -12,6 +12,7 @@ class Perssone
     protected $ville;
     protected $cp;
     protected $mdp;
+    protected $mdp_provisoire;
 
     /**
      * @return mixed
@@ -19,14 +20,6 @@ class Perssone
     public function getNom()
     {
         return $this->nom;
-    }
-
-    /**
-     * @param mixed $nom
-     */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
     }
 
     /**
@@ -38,27 +31,11 @@ class Perssone
     }
 
     /**
-     * @param mixed $prenom
-     */
-    public function setPrenom($prenom)
-    {
-        $this->prenom = $prenom;
-    }
-
-    /**
      * @return mixed
      */
     public function getEmail()
     {
         return $this->email;
-    }
-
-    /**
-     * @param mixed $email
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
     }
 
     /**
@@ -70,27 +47,11 @@ class Perssone
     }
 
     /**
-     * @param mixed $daten
-     */
-    public function setDaten($daten)
-    {
-        $this->daten = $daten;
-    }
-
-    /**
      * @return mixed
      */
     public function getAdresse()
     {
         return $this->adresse;
-    }
-
-    /**
-     * @param mixed $adresse
-     */
-    public function setAdresse($adresse)
-    {
-        $this->adresse = $adresse;
     }
 
     /**
@@ -102,27 +63,11 @@ class Perssone
     }
 
     /**
-     * @param mixed $ville
-     */
-    public function setVille($ville)
-    {
-        $this->ville = $ville;
-    }
-
-    /**
      * @return mixed
      */
     public function getCp()
     {
         return $this->cp;
-    }
-
-    /**
-     * @param mixed $cp
-     */
-    public function setCp($cp)
-    {
-        $this->cp = $cp;
     }
 
     /**
@@ -134,11 +79,20 @@ class Perssone
     }
 
     /**
-     * @param mixed $mdp
+     * @return mixed
      */
-    public function setMdp($mdp)
+    public function getMdpProvisoire()
     {
-        $this->mdp = $mdp;
+        return $this->mdp_provisoire;
     }
+
+    /**
+     * @param mixed $mdp_provisoire
+     */
+    public function setMdp($mdp )
+    {
+
+    }
+
 
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 09, 2024 at 12:19 AM
+-- Generation Time: Apr 19, 2024 at 09:53 AM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.13
 
@@ -31,7 +31,9 @@ DROP TABLE IF EXISTS `aeroport`;
 CREATE TABLE IF NOT EXISTS `aeroport` (
   `id_aeroport` int NOT NULL AUTO_INCREMENT,
   `libelle` varchar(50) NOT NULL,
-  PRIMARY KEY (`id_aeroport`)
+  `ref_user` int NOT NULL,
+  PRIMARY KEY (`id_aeroport`),
+  KEY `fk_aeroport_user` (`ref_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -60,7 +62,9 @@ DROP TABLE IF EXISTS `compagnie`;
 CREATE TABLE IF NOT EXISTS `compagnie` (
   `id_compagnie` int NOT NULL AUTO_INCREMENT,
   `libelle` varchar(50) NOT NULL,
-  PRIMARY KEY (`id_compagnie`)
+  `ref_user` int NOT NULL,
+  PRIMARY KEY (`id_compagnie`),
+  KEY `fk_compagnie_user` (`ref_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -86,21 +90,11 @@ CREATE TABLE IF NOT EXISTS `lier` (
 DROP TABLE IF EXISTS `pillot`;
 CREATE TABLE IF NOT EXISTS `pillot` (
   `id_pillot` int NOT NULL AUTO_INCREMENT,
-  `date_debut` date DEFAULT NULL,
-  `date_fin` date DEFAULT NULL,
-  `nb_repos` int NOT NULL,
-  `nom` varchar(50) NOT NULL,
-  `prenom` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `daten` date NOT NULL,
-  `addresse` varchar(50) NOT NULL,
-  `cp` varchar(6) NOT NULL,
-  `ville` varchar(50) NOT NULL,
-  `mdp` varchar(50) NOT NULL,
-  `mdp_provisoir` varchar(50) DEFAULT NULL,
   `ref_compagnie` int NOT NULL,
+  `ref_user` int NOT NULL,
   PRIMARY KEY (`id_pillot`),
-  KEY `fk_pillot_compagnie` (`ref_compagnie`)
+  KEY `fk_pillot_compagnie` (`ref_compagnie`),
+  KEY `fk_pillot_user` (`ref_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -154,8 +148,9 @@ CREATE TABLE IF NOT EXISTS `user` (
   `rue` text NOT NULL,
   `ville` varchar(50) NOT NULL,
   `cp` varchar(6) NOT NULL,
-  `mdp` varchar(50) NOT NULL,
+  `mdp` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `status` varchar(50) NOT NULL,
+  `mdp_provisoire` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -188,10 +183,22 @@ CREATE TABLE IF NOT EXISTS `vol` (
 --
 
 --
+-- Constraints for table `aeroport`
+--
+ALTER TABLE `aeroport`
+  ADD CONSTRAINT `fk_aeroport_user` FOREIGN KEY (`ref_user`) REFERENCES `user` (`id_user`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
 -- Constraints for table `avion`
 --
 ALTER TABLE `avion`
   ADD CONSTRAINT `fk_avion_compagnie` FOREIGN KEY (`ref_compagnie`) REFERENCES `compagnie` (`id_compagnie`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Constraints for table `compagnie`
+--
+ALTER TABLE `compagnie`
+  ADD CONSTRAINT `fk_compagnie_user` FOREIGN KEY (`ref_user`) REFERENCES `user` (`id_user`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `lier`
@@ -204,7 +211,8 @@ ALTER TABLE `lier`
 -- Constraints for table `pillot`
 --
 ALTER TABLE `pillot`
-  ADD CONSTRAINT `fk_pillot_compagnie` FOREIGN KEY (`ref_compagnie`) REFERENCES `compagnie` (`id_compagnie`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `fk_pillot_compagnie` FOREIGN KEY (`ref_compagnie`) REFERENCES `compagnie` (`id_compagnie`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `fk_pillot_user` FOREIGN KEY (`ref_user`) REFERENCES `user` (`id_user`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `repos`

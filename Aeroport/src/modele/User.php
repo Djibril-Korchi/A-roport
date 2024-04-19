@@ -23,7 +23,7 @@ class User extends Perssone {
      */
     public function getIdUser()
     {
-        return $this->idUser;
+        return $this->id_user;
     }
 
     /**
@@ -33,21 +33,7 @@ class User extends Perssone {
     {
         return $this->status;
     }
-    /**
-     * @param mixed $idUser
-     */
 
-    public function setIdUser($idUser)
-    {
-        $this->idUser = $idUser;
-    }
-    /**
-     * @param mixed $status
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-    }
 
     public function inscription(){
 
@@ -60,7 +46,7 @@ class User extends Perssone {
         if ($verif){
             header("Location: ../../vue/inscription.html");
         }else{
-            $inscription=$bdd->getBdd()->query("INSERT INTO user(nom,prenom,email,daten,rue,ville,cp,mdp,status) VALUES (:n,:p,:e,:d,:r,:v,:cp,:mdp,:s)");
+            $inscription=$bdd->getBdd()->query("INSERT INTO user(nom,prenom,email,daten,rue,ville,cp,mdp_provisoire,status) VALUES (:n,:p,:e,:d,:r,:v,:cp,:mdp,:s)");
             $inscription->execute(array(
                 'n'=>$this->getNom(),
                 'p'=>$this->getPrenom(),
@@ -69,7 +55,7 @@ class User extends Perssone {
                 'r'=>$this->getAdresse(),
                 'v'=>$this->getVille(),
                 'cp'=>$this->getCp(),
-                'mdp'=>$this->getMdp(),
+                'mdp'=>uniqid(),
                 's'=>$this->getStatus(),
             ));
             header("Location: ../../vue/connection.html");
@@ -83,7 +69,10 @@ class User extends Perssone {
             "mdp" =>$this->getMdp(),
         ));
         $res = $req->fetch();
-        if (is_array($res)){
+        if (is_array($res["mdp_provisoire"])){
+            header("Location : ../../vue/setMdp.php");
+        }
+        elseif (is_array($res)){
             $this->setNom($res["nom"]);
             $this->setPrenom($res["prenom"]);
             $this->setDaten($res["daten"]);
