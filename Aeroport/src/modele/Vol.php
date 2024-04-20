@@ -2,12 +2,25 @@
 
 namespace modele;
 
+<<<<<<< HEAD
 
+=======
+use Bdd;
+>>>>>>> 3aee0c69d99c110f6495140ce80dd89dd13e2a4e
 
+class Vol{
 
-class Vol
-{
-    protected $id_vol;
+    private $id_vol;
+    private $destination;
+    private $ville_arriver;
+    private $heure_depart;
+    private $heure_arriver;
+    private $ville_depart;
+    private $date;
+    private $prix;
+    private $ref_avion;
+    private $ref_aeroport;
+    private $ref_pillot;
 
     /**
      * @return mixed
@@ -18,18 +31,20 @@ class Vol
     }
 
     /**
-     * @param mixed $id_vol
+     * @return mixed
      */
-    public function setIdVol($id_vol)
+    public function getDestination()
     {
-        $this->id_vol = $id_vol;
+        return $this->destination;
     }
-    protected $heure_depart;
-    protected $heure_arriver;
-    protected $ville_depart;
-    protected $classe;
-    protected $prix;
-    protected $ref_avion;
+
+    /**
+     * @return mixed
+     */
+    public function getVilleArriver()
+    {
+        return $this->ville_arriver;
+    }
 
     /**
      * @return mixed
@@ -37,14 +52,6 @@ class Vol
     public function getHeureDepart()
     {
         return $this->heure_depart;
-    }
-
-    /**
-     * @param mixed $heure_depart
-     */
-    public function setHeureDepart($heure_depart)
-    {
-        $this->heure_depart = $heure_depart;
     }
 
     /**
@@ -56,14 +63,6 @@ class Vol
     }
 
     /**
-     * @param mixed $heure_arriver
-     */
-    public function setHeureArriver($heure_arriver)
-    {
-        $this->heure_arriver = $heure_arriver;
-    }
-
-    /**
      * @return mixed
      */
     public function getVilleDepart()
@@ -72,27 +71,11 @@ class Vol
     }
 
     /**
-     * @param mixed $ville_depart
-     */
-    public function setVilleDepart($ville_depart)
-    {
-        $this->ville_depart = $ville_depart;
-    }
-
-    /**
      * @return mixed
      */
-    public function getClasse()
+    public function getDate()
     {
-        return $this->classe;
-    }
-
-    /**
-     * @param mixed $classe
-     */
-    public function setClasse($classe)
-    {
-        $this->classe = $classe;
+        return $this->date;
     }
 
     /**
@@ -104,14 +87,6 @@ class Vol
     }
 
     /**
-     * @param mixed $prix
-     */
-    public function setPrix($prix)
-    {
-        $this->prix = $prix;
-    }
-
-    /**
      * @return mixed
      */
     public function getRefAvion()
@@ -120,16 +95,25 @@ class Vol
     }
 
     /**
-     * @param mixed $ref_avion
+     * @return mixed
      */
-    public function setRefAvion($ref_avion)
+    public function getRefAeroport()
     {
-        $this->ref_avion = $ref_avion;
+        return $this->ref_aeroport;
     }
 
-    public function Vol(){
+    /**
+     * @return mixed
+     */
+    public function getRefPillot()
+    {
+        return $this->ref_pillot;
+    }
+
+    public function newVol(){
 
         $bdd = new Bdd();
+<<<<<<< HEAD
         $inscription=$bdd->getBdd()->query("INSERT INTO vol(destination,heure_depart,heure_arriver,ville_depart,classe,prix,ref_avion) VALUES (:n,:p,:e,:d,:r,:v,:cp,:mdp,:s)");
         $inscription->execute(array(
             'n'=>$this->getDestination(),
@@ -161,3 +145,44 @@ public function editerVol()
     ));
 }
 }
+=======
+        $inscription=$bdd->getBdd()->query("INSERT INTO vol(destination,ville_arriver,heure_depart,heure_arriver,ville_depart,prix,ref_avion,ref_pillot) VALUES (:destination,:ville,:heure_depart,:heure_arriver,:ville_depart,:prix,:ref_avion,:ref_pillot)");
+        $inscription->execute(array(
+            'destination'=>$this->getDestination(),
+            'ville'=>$this->getVilleArriver(),
+            'heure_depart'=>$this->getHeureDepart(),
+            'heure_arriver'=>$this->getHeureArriver(),
+            'ville_depart'=>$this->getVilleDepart(),
+            'prix'=>$this->getPrix(),
+            'ref_avion'=>$this->getRefAvion(),
+            'ref_aeroport'=>$this->getRefAeroport(),
+            'ref_pillot'=>$this->getRefPillot()
+        ));
+        header("Location: ../../vue/connection.html");
+    }
+    public function setVol(){
+
+        $bdd = new Bdd();
+        $inscription=$bdd->getBdd()->query("UPDATE vol SET destination=:destination,heure_depart=:heure_depart,heure_arriver=:heure_arriver,ville_depart=:ville_depart,prix=:prix,ref_avion=:ref_avion,ref_aeroport=:ref_aeroport,ref_pillot=:ref_pillot WHERE id_vol=:id_vol");
+        $inscription->execute(array(
+            'destination'=>$this->getDestination(),
+            'heure_depart'=>$this->getHeureDepart(),
+            'heure_arriver'=>$this->getHeureArriver(),
+            'ville_depart'=>$this->getVilleDepart(),
+            'prix'=>$this->getPrix(),
+            'ref_avion'=>$this->getRefAvion(),
+            'ref_aeroport'=>$this->getRefAeroport(),
+            'ref_pillot'=>$this->getRefPillot(),
+            'id_vol'=>$this->getIdVol()
+        ));
+        header("Location: ../../vue/connection.html");
+    }
+    public function getVol(){
+        $bdd = new Bdd();
+        $req=$bdd->getBdd()->query("SELECT v.*, c.libelle FROM vol as v INNER JOIN avion AS a ON v.ref_avion = a.id_avion INNER JOIN compagnie as c ON a.ref_compagnie = c.id_compagnie");
+        return $req->fetchAll();
+    }
+
+
+}
+>>>>>>> 3aee0c69d99c110f6495140ce80dd89dd13e2a4e
