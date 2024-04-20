@@ -2,7 +2,7 @@
 
 namespace modele;
 
-protected $destination;
+
 
 
 class Vol
@@ -130,17 +130,34 @@ class Vol
     public function Vol(){
 
         $bdd = new Bdd();
-            $inscription=$bdd->getBdd()->query("INSERT INTO vol(destination,heure_depart,heure_arriver,ville_depart,classe,prix,ref_avion) VALUES (:n,:p,:e,:d,:r,:v,:cp,:mdp,:s)");
-            $inscription->execute(array(
-                'n'=>$this->getDestination(),
-                'p'=>$this->getheure_depart(),
-                'e'=>$this->getheure_arriver(),
-                'd'=>$this->getville_depart(),
-                'r'=>$this->getclasse(),
-                'v'=>$this->getprix(),
-                'cp'=>$this->getref_avion(),
-
-            ));
+        $inscription=$bdd->getBdd()->query("INSERT INTO vol(destination,heure_depart,heure_arriver,ville_depart,classe,prix,ref_avion) VALUES (:n,:p,:e,:d,:r,:v,:cp,:mdp,:s)");
+        $inscription->execute(array(
+            'n'=>$this->getDestination(),
+            'p'=>$this->getheure_depart(),
+            'e'=>$this->getheure_arriver(),
+            'd'=>$this->getville_depart(),
+            'r'=>$this->getclasse(),
+            'v'=>$this->getprix(),
+            'cp'=>$this->getref_avion(),
+        ));
             header("Location: ../../vue/connection.html");
-        }
     }
+
+public function editerVol()
+{
+    $bdd = new Bdd();
+    $req = $bdd->getBdd()->prepare('UPDATE User SET destination=:destination,heure_depart=:heure_depart,heure_arriver=:heure_arriver,ville_depart=:ville_depart,classe=:classe,prix=:prix,ref_avion=:ref_avion WHERE id_user=:id_vol');
+    $req->execute(array(
+        "destination" => $this->getDestination(),
+        "heure_depart" => $this->getHeure_depart(),
+        "heure_arriver" => $this->getHeure_arriver(),
+        "ville_depart" => $this->getVille_depart(),
+        "classe" => $this->getClasse(),
+        "prix" => $this->getPrix(),
+        "ref_avion" => $this->getRef_avion(),
+        "mdp" => $this->getMdp(),
+        "status" => $this->getStatus(),
+        "id_user" => $this->getIdUser()
+    ));
+}
+}
