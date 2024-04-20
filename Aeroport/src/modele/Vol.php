@@ -2,7 +2,10 @@
 
 namespace modele;
 
+use Bdd;
+
 class Vol{
+
     private $id_vol;
     private $destination;
     private $heure_depart;
@@ -219,8 +222,7 @@ class Vol{
     }
     public function getVol(){
         $bdd = new Bdd();
-        $req=$bdd->getBdd()->query("SELECT * FROM vol");
-        $vol=$req->fetchAll();
-        return $vol;
+        $req=$bdd->getBdd()->query("SELECT v.*, c.libelle FROM vol as v INNER JOIN avion AS a ON v.ref_avion = a.id_avion INNER JOIN compagnie as c ON a.ref_compagnie = c.id_compagnie");
+        return $req->fetchAll();
     }
 }

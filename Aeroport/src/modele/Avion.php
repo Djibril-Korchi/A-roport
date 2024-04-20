@@ -48,5 +48,5 @@ class Avion {
             'ref'=>$this->getRefCompagnie()
         ));
     }
-    
+
 }
