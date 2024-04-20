@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 20, 2024 at 08:06 AM
+-- Generation Time: Apr 20, 2024 at 06:47 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.13
 
@@ -31,9 +31,7 @@ DROP TABLE IF EXISTS `aeroport`;
 CREATE TABLE IF NOT EXISTS `aeroport` (
   `id_aeroport` int NOT NULL AUTO_INCREMENT,
   `libelle` varchar(50) NOT NULL,
-  `ref_user` int NOT NULL,
-  PRIMARY KEY (`id_aeroport`),
-  KEY `fk_aeroport_user` (`ref_user`)
+  PRIMARY KEY (`id_aeroport`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -126,6 +124,7 @@ CREATE TABLE IF NOT EXISTS `reservation` (
   `id_reseration` int NOT NULL AUTO_INCREMENT,
   `nb_place` int NOT NULL,
   `classe` varchar(50) NOT NULL,
+  `Date_annulation` datetime NOT NULL,
   `ref_user` int NOT NULL,
   `ref_vol` int NOT NULL,
   PRIMARY KEY (`id_reseration`),
@@ -165,29 +164,22 @@ DROP TABLE IF EXISTS `vol`;
 CREATE TABLE IF NOT EXISTS `vol` (
   `id_vol` int NOT NULL AUTO_INCREMENT,
   `destination` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `ville_arriver` varchar(50) NOT NULL,
   `heure_depart` datetime NOT NULL,
   `heure_arriver` datetime NOT NULL,
   `ville_depart` varchar(50) NOT NULL,
-  `date` date NOT NULL,
   `prix` int NOT NULL,
+  `place_restant` int NOT NULL,
   `ref_avion` int NOT NULL,
-  `ref_aeroport` int NOT NULL,
   `ref_pillot` int NOT NULL,
   PRIMARY KEY (`id_vol`),
   KEY `fk_vol_avion` (`ref_avion`),
-  KEY `fk_vol_aeroport` (`ref_aeroport`),
   KEY `fk_vol_pillot` (`ref_pillot`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `aeroport`
---
-ALTER TABLE `aeroport`
-  ADD CONSTRAINT `fk_aeroport_user` FOREIGN KEY (`ref_user`) REFERENCES `user` (`id_user`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `avion`
@@ -232,7 +224,6 @@ ALTER TABLE `reservation`
 -- Constraints for table `vol`
 --
 ALTER TABLE `vol`
-  ADD CONSTRAINT `fk_vol_aeroport` FOREIGN KEY (`ref_aeroport`) REFERENCES `aeroport` (`id_aeroport`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `fk_vol_avion` FOREIGN KEY (`ref_avion`) REFERENCES `avion` (`id_avion`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `fk_vol_pillot` FOREIGN KEY (`ref_pillot`) REFERENCES `pillot` (`id_pillot`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 COMMIT;

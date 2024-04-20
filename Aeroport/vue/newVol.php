@@ -15,6 +15,12 @@
     <script src="../assets/js/jquery-2.1.1.min.js.téléchargement"></script>
 
     <script src="../assets/js/bootstrap.min.js.téléchargement"></script>
+    <?php
+    include "../src/bdd/Bdd.php";
+    include "../src/modele/pillot";
+    include "../src/modele/avion";
+
+    ?>
 </head>
 
 <body>
@@ -70,20 +76,13 @@
         </div>
     </div>
 </section>
-<form action="conection.php" method="post">
+<form action="user.php" method="post">
     <table>
         <tr>
-            <td>Email</td>
-            <td><input type="email" name="email"></td>
-        </tr>
-        <tr>
-            <td>Mot de Passe</td>
-            <td><input type="password" name="mdp"></td>
-        </tr>
-        <tr>
-            <td><input type="submit" name="connection" value="Connection"></td>
+            <td>Destination</td>
+            <td><select>
+                    <option
+                </select></td>
         </tr>
     </table>
 </form>
-</body>
-</html>

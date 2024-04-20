@@ -99,6 +99,7 @@
     <thead>
     <tr>
         <th>Compagnie</th>
+        <th>Destination</th>
         <th>Aéroport de départ</th>
         <th>Aéroport de destination</th>
         <th>Heure de départ</th>
@@ -113,6 +114,7 @@
     ?>
     <tr>
         <td><?= $element['c.libelle'] ?></td>
+        <td><?= $element['v.ville_arriver'] ?></td>
         <td><?= $element['v.ville_depart'] ?></td>
         <td><?= $element['v.destination'] ?></td>
         <td><?= $element['v.heure_depart'] ?></td>

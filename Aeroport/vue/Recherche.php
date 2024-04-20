@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0080)https://www.templateonweb.com/upload/aedemodir/9872ed9fc22fc182d371c3e9ed316094/ -->
+
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="robots" content="noindex,nofollow">
 
@@ -15,6 +15,9 @@
     <script src="../assets/js/jquery-2.1.1.min.js.téléchargement"></script>
 
     <script src="../assets/js/bootstrap.min.js.téléchargement"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/css/Select2.css">
+
 </head>
 
 <body>
@@ -70,20 +73,13 @@
         </div>
     </div>
 </section>
-<form action="conection.php" method="post">
-    <table>
-        <tr>
-            <td>Email</td>
-            <td><input type="email" name="email"></td>
-        </tr>
-        <tr>
-            <td>Mot de Passe</td>
-            <td><input type="password" name="mdp"></td>
-        </tr>
-        <tr>
-            <td><input type="submit" name="connection" value="Connection"></td>
-        </tr>
-    </table>
-</form>
+<label for="recherche"></label><select name="recherche" id="recherche">
+    <option value="AL">Alabama</option>
+    ...
+    <option value="WY">Wyoming</option>
+</select>
+<script src="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.78/Build/Cesium/Cesium.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="../assets/js/Select2.js"
 </body>
 </html>

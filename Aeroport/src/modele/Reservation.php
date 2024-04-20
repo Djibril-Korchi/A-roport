@@ -2,6 +2,9 @@
 
 namespace modele;
 
+use Bdd;
+use Cassandra\Date;
+
 class Reservation{
     private $id_reservation;
     private $nb_place;
@@ -16,7 +19,7 @@ class Reservation{
             if (method_exists($this, $method)){
                 $this->$method($value);
             }
-        }
+        };
     }
 
     /**
@@ -46,16 +49,27 @@ class Reservation{
     /**
      * @return mixed
      */
+
     public function getRefVol()
     {
         return $this->ref_vol;
     }
     public function newReservation(){
         $bdd =new Bdd();
-        $req = $bdd->getBdd()->prepare('INSERT INTO reservation(nb_place, classe, ref_user, ref_vol) VALUES (:nb, :classe, :ref_u, :ref_v)');
+        $req1= $bdd->getBdd()->prepare('SELECT heure_depart FROM vol WHERE id_vol=:vol');
+        $req1->execute(array(
+
+        ));
+        $res=$req1->fetchAll();
+        $date = new Date();
+        $date->format('Y-m-d H:i:s');
+        $date->toDateTime($res['heure_depart']);
+        $date->modify('-2 day');
+        $req = $bdd->getBdd()->prepare('INSERT INTO reservation(nb_place, classe,Date_annulation, ref_user, ref_vol) VALUES (:nb, :classe,:date, :ref_u, :ref_v)');
         $req->execute(array(
             'nb'=>$this->getNbPlace(),
             'classe'=>$this->getClasse(),
+            'date'=>$date,
             'ref_u'=>$_SESSION["id_user"],
             'ref_v'=>$this->getRefVol()
         ));
@@ -65,6 +79,12 @@ class Reservation{
         ));
     }
     public function removeReservation(){
-        $
+        $bdd=new Bdd();
+        $req=$bdd->getBdd()->prepare('DELETE FROM reservation WHERE id_reseration=:id and :date not between Date_annulation and (SELECT heure_depart FROM vol where :vol)');
+        $req->execute(array(
+            'id'=>$this->getIdReservation(),
+            'date'=>checkdate(),
+            'vol'=>$this->getRefVol()
+        ));
     }
 }
