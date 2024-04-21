@@ -39,4 +39,10 @@ class Aeroport{
             header("Location: ../../vue/connection.html");
         }
     }
+    public function listDestination(){
+        $bdd = new Bdd();
+        $req=$bdd->getBdd()->query("SELECT libelle FROM aeroport");
+        return $req->fetchAll();
+    }
+
 }

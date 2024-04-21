@@ -17,8 +17,9 @@
     <script src="../assets/js/bootstrap.min.js.téléchargement"></script>
     <?php
     include "../src/bdd/Bdd.php";
-    include "../src/modele/pillot";
-    include "../src/modele/avion";
+    include "../src/modele/Perssone.php";
+    include "../src/modele/Pillot.php";
+    include "../src/modele/Avion.php";
 
     ?>
 </head>
@@ -79,10 +80,67 @@
 <form action="user.php" method="post">
     <table>
         <tr>
-            <td>Destination</td>
-            <td><select>
-                    <option
+            <td>Ville d'arriver</td>
+            <td><input type="text" name="ville" </td>
+        </tr>
+        <tr>
+            <td>Aéroport départ</td>
+            <td><select name="depart">
+                    <?php
+                    $aeroport=new \modele\Aeroport();
+                    $libelle=$aeroport->listDestination();
+                    foreach ($libelle as $element){
+                        echo "<a></a><optiont name='".$element['libelle']."'>".$element['libelle']." </optiont>";
+                    }
+                    ?>
                 </select></td>
         </tr>
+        <tr>
+            <td>Aéroport arriver</td>
+            <td><select name="arriver">
+                    <?php
+                    $aeroport=new \modele\Aeroport();
+                    $libelle=$aeroport->listDestination();
+                    foreach ($libelle as $element){
+                        echo "<a></a><optiont name='".$element['libelle']."'>".$element['libelle']." </optiont>";
+                    }
+                    ?>
+                </select></td>
+        </tr>
+        <tr>
+            <td>Aéroport arriver</td>
+            <td><select name="arriver">
+                    <?php
+                    foreach ($libelle as $element){
+                        echo "<a></a><optiont name='".$element['libelle']."'>".$element['libelle']." </optiont>";
+                    }
+                    ?>
+                </select></td>
+        </tr>
+        <tr>
+            <td>Date et heure de arriver</td>
+            <td><input type="datetime-local" name="datea"></td>
+        </tr>
+        <tr>
+            <td>Date et heure de départ</td>
+            <td><input type="datetime-local" name="dated"></td>
+        </tr>
+        <tr>
+            <td>Avion</td>
+            <td><select name="avion">
+                    <?php
+                    $avion=new \modele\Avion();
+                    $id=$avion->avion();
+                    foreach ($libelle as $element){
+                        echo "<a></a><optiont name='".$element['matricule']."'>".$element['matricule']." </optiont>";
+                    }
+                    ?>
+                </select></td>
+        </tr>
+        <tr>
+            <td>Prix</td>
+            <td><input type="number" name="prix">€</td>
+        </tr>
+
     </table>
 </form>

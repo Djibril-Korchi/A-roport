@@ -191,4 +191,13 @@ class Pillot extends Perssone {
         ));
         return $req->fetchAll();
     }
+    public function setNewMdp($mdp){
+        $bdd = new Bdd();
+        $req=$bdd->getBdd()->prepare("UPDATE user SET mdp_provisoire=:mdp_p and mdp=:mdp where id_user=:id");
+        $req->execute(array(
+            'mdp_p'=>"MotDePasseNonValable",
+            'mdp'=>$mdp,
+            'id'=>$_SESSION['id_']
+        ));
+    }
 }

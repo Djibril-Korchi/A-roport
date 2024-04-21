@@ -39,14 +39,19 @@ class Avion {
         return $this->ref_compagnie;
     }
 
-    public function newAvion(){
+    public function newAvion()
+    {
         $bdd = new Bdd();
-        $req=$bdd->getBdd()->prepare('INSERT INTO avion(matricule, nb_place, ref_compagnie) VALUES (:matricule,:nb,:ref)');
+        $req = $bdd->getBdd()->prepare('INSERT INTO avion(matricule, nb_place, ref_compagnie) VALUES (:matricule,:nb,:ref)');
         $req->execute(array(
-            'matricule'=>$this->getMatricule(),
-            'nb'=>$this->getNbPlace(),
-            'ref'=>$this->getRefCompagnie()
+            'matricule' => $this->getMatricule(),
+            'nb' => $this->getNbPlace(),
+            'ref' => $this->getRefCompagnie()
         ));
     }
+    public function avion(){
+        $bdd = new Bdd();
+        $req = $bdd->getBdd()->prepare('SELECT matricule FROM avion');
 
+    }
 }

@@ -43,6 +43,14 @@ class User extends Perssone {
         return $this->status;
     }
 
+    /**
+     * @param mixed $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
 
     public function inscription(){
 
@@ -67,7 +75,7 @@ class User extends Perssone {
                 'mdp'=>uniqid(),
                 's'=>$this->getStatus(),
             ));
-            header("Location: ../../vue/connection.html");
+            header("Location: ../../vue/Connection.html");
         }
     }
     public function connexion(){
@@ -77,7 +85,7 @@ class User extends Perssone {
             'email'=>$this->getEmail()
         ));
         $id=$req1->fetchAll();
-        User::setIdUser($req1['id_user']);
+
         $req = $bdd->getBdd()->prepare('SELECT * FROM `user` WHERE email=:email and mdp=:mdp');
         $req->execute(array(
             "email" =>$this->getEmail(),
@@ -88,15 +96,25 @@ class User extends Perssone {
             header("Location : ../../vue/setMdp.php");
         }
         elseif (is_array($res)){
+            User::setIdUser($req1['id_user']);
             $this->setNom($res["nom"]);
             $this->setPrenom($res["prenom"]);
             $this->setDaten($res["daten"]);
+            $this->setAdresse($res['addresse']);
+            $this->setCp($res['cp']);
+            $this->setVille($res['ville']);
+            $this->setMdp($res['mdp']);
+            $this->setStatus();
             session_start();
 
             $_SESSION["user"] = $this;
-            header("Location: ../../vue/accueil.php");
+            if ($this->getStatus()=="vol"){
+                header("Location: ../../vue/accueilVol.php");
+            }elseif ($this->getStatus()=="admin"){
+                header("Location: ../../vue/accueilClient.php");
+            }
         }else{
-            header("Location: ../../vue/connexion.php");
+            header("Location: ../../vue/Connexion.html");
         }
     }
 
@@ -143,5 +161,14 @@ class User extends Perssone {
         ));
         $reservation=$req->fetchAll();
         return $reservation;
+    }
+    public function setNewMdp($mdp){
+        $bdd = new Bdd();
+        $req=$bdd->getBdd()->prepare("UPDATE user SET mdp_provisoire=:mdp_p and mdp=:mdp where id_user=:id");
+        $req->execute(array(
+            'mdp_p'=>"MotDePasseNonValable",
+            'mdp'=>$mdp,
+            'id'=>User::getIdUser()
+        ));
     }
 }

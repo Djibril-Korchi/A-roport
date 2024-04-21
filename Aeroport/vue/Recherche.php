@@ -74,12 +74,17 @@
     </div>
 </section>
 <label for="recherche"></label><select name="recherche" id="recherche">
-    <option value="AL">Alabama</option>
-    ...
-    <option value="WY">Wyoming</option>
+    <?php
+    $vol=new \modele\Vol();
+    $matricule=$vol->listDestination();
+    echo var_dump($matricule);
+    foreach($matricule as $element){
+        echo "<a></a><option name='".$element['matricule']."'>".$element['matricule']."</option>";
+    }
+    ?>
 </select>
 <script src="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.78/Build/Cesium/Cesium.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script src="../assets/js/Select2.js"
+<script src="../assets/js/Select2.js"></script>
 </body>
 </html>

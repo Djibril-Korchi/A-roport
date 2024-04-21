@@ -70,4 +70,11 @@
         </div>
     </div>
 </section>
-<form method="post" action=""
+<form method="post" action="../src/controleur/controleur.php">
+    <table>
+        <tr>
+            <td>Nouveau Mot de Passe</td>
+            <td><input type="text" name="mdp"></td>
+        </tr>
+    </table>
+</form>
