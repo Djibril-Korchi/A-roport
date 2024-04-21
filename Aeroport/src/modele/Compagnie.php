@@ -107,16 +107,8 @@ class Compagnie extends Perssone{
                 'libelle'=>$this->getLibelle(),
                 'ref_u'=>$reqid['id_user']
             ));
-            $requete=$bdd->getBdd()->prepare('SELECT id_compagnie FROM compagnie WHERE ref_user = :id');
-            $requete->execute(array(
-                'id'=>$reqid['id_user']
-            ));
-            $res=$requete->fetchAll();
-            $lier=$bdd->getBdd()->prepare('INSERT INTO lier VALUES (:ref_c,:ref_a)');
-            $lier->execute(array(
-                'ref_c'=>$res['id_compagnie'],
-                'ref_a'=>$this->getIdAeroport()
-            ));
+
+
 
             header("Location: ../../vue/connection.html");
         }

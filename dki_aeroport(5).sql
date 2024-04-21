@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 20, 2024 at 06:47 PM
+-- Generation Time: Apr 21, 2024 at 10:50 AM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.13
 
@@ -123,7 +123,6 @@ DROP TABLE IF EXISTS `reservation`;
 CREATE TABLE IF NOT EXISTS `reservation` (
   `id_reseration` int NOT NULL AUTO_INCREMENT,
   `nb_place` int NOT NULL,
-  `classe` varchar(50) NOT NULL,
   `Date_annulation` datetime NOT NULL,
   `ref_user` int NOT NULL,
   `ref_vol` int NOT NULL,

@@ -70,6 +70,3 @@
     </div>
   </div>
 </section>
-<?php
-
-
