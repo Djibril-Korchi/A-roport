@@ -5,7 +5,16 @@ namespace modele;
 class Compagnie extends Perssone{
     private static $id_compagnie;
     private $libelle;
-    private static $ref_user;
+    private $ref_user;
+    private $id_aeroport;
+
+    /**
+     * @return mixed
+     */
+    public static function getIdCompagnie()
+    {
+        return self::$id_compagnie;
+    }
 
     /**
      * @return mixed
@@ -18,9 +27,9 @@ class Compagnie extends Perssone{
     /**
      * @return mixed
      */
-    public static function getIdCompagnie()
+    public function getRefUser()
     {
-        return self::$id_compagnie;
+        return $this->ref_user;
     }
 
     /**
@@ -32,19 +41,35 @@ class Compagnie extends Perssone{
     }
 
     /**
-     * @return mixed
+     * @param mixed $libelle
      */
-    public static function getRefUser()
+    public function setLibelle($libelle)
     {
-        return self::$ref_user;
+        $this->libelle = $libelle;
     }
 
     /**
      * @param mixed $ref_user
      */
-    public static function setRefUser($ref_user)
+    public function setRefUser($ref_user)
     {
-        self::$ref_user = $ref_user;
+        $this->ref_user = $ref_user;
+    }
+
+    /**
+     * @param mixed $id_aeroport
+     */
+    public function setIdAeroport($id_aeroport)
+    {
+        $this->id_aeroport = $id_aeroport;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdAeroport()
+    {
+        return $this->id_aeroport;
     }
 
     public function inscription(){
@@ -79,8 +104,20 @@ class Compagnie extends Perssone{
             Pillot::setRefUser($reqid['id_user']);
             $req=$bdd->getBdd()->prepare("INSERT INTO compagnie(libelle, ref_user) VALUES (:libelle,:ref_u)");
             $req->execute(array(
-                $this->libelle
+                'libelle'=>$this->getLibelle(),
+                'ref_u'=>$reqid['id_user']
             ));
+            $requete=$bdd->getBdd()->prepare('SELECT id_compagnie FROM compagnie WHERE ref_user = :id');
+            $requete->execute(array(
+                'id'=>$reqid['id_user']
+            ));
+            $res=$requete->fetchAll();
+            $lier=$bdd->getBdd()->prepare('INSERT INTO lier VALUES (:ref_c,:ref_a)');
+            $lier->execute(array(
+                'ref_c'=>$res['id_compagnie'],
+                'ref_a'=>$this->getIdAeroport()
+            ));
+
             header("Location: ../../vue/connection.html");
         }
 
@@ -114,5 +151,6 @@ class Compagnie extends Perssone{
             header("Location: ../../vue/connexion.php");
         }
     }
+
 
 }

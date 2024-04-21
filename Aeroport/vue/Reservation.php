@@ -28,7 +28,7 @@
                 <div class="top_2 clearfix">
                     <div class="col-sm-3">
                         <div class="top_2_left">
-                            <h1><a href="Siteweb_Client.php">CINEMA ZONE <span>BOOKING</span></a></h1>
+                            <h1><a href="Siteweb_Client.php"> SHUMANAIR </a></h1>
                         </div>
                     </div>
                     <div class="col-sm-9">
@@ -64,52 +64,23 @@
 
                         </ul>
 
-                    </div><!-- /.nav-collapse -->
+                    </div>
                 </nav>
             </div>
         </div>
     </div>
 </section>
-<form action="../src/controleur/controleur.php" method="post">
+<form method="post" action="../src/controleur/controleur.php">
+    <table>
+        <tr>
+            <td>Nombre de place reserver</td>
+            <td><input type="number" name="nb"></td>
+        </tr>
+        <tr>
 
-    <h3> <table>
-        <tr>
-            <td>Votre Nom :</td>
-            <td><input type="text" name="nom"></td>
-            <td> |  | </td>
-            <td>Votre rue:</td>
-            <td><input type="text" name="rue"></td>
+            <td><input type="text" value="<?=$_POST['id']?>" name="id">
+                <input type="submit" name="reserver" value="Reseerver" </td>
+
         </tr>
-        <tr><td><br></td><td></td><td> |  | </td></tr>
-        <tr>
-            <td>Votre Prénom</td>
-            <td><input type="text" name="prenom"></td>
-            <td> |  | </td>
-            <td>Votre Code Postal:</td>
-            <td><input type="text" name="cp"></td>
-        </tr>
-        <tr><td><br></td><td></td><td> |  | </td></tr>
-        <tr>
-            <td>Votre email:</td>
-            <td><input type="email" name="email"></td>
-            <td> |  | </td>
-            <td>Votre Ville</td>
-            <td><input type="text" name="ville"></td>
-        </tr>
-        <tr><td><br></td><td></td><td> |  | </td></tr>
-        <tr>
-            <td>Votre date de Naissance</td>
-            <td><input type="date" name="daten"></td>
-            <td> |  | </td>
-            <td><input type="text" name="status" value="Client" hidden="hidden"></td>
-        </tr>
-        <tr>
-            <td><br></td>
-        </tr>
-        <tr>
-            <td><button type="reset" class="btn btn-outline-primary">Réinitialiser</button> </td>
-            <td><input type="submit" class="btn btn-outline-primary" name="inscription" value="Inscription"></td>
-        </tr>
-    </table></h3>
+    </table>
 </form>
-</body></html>

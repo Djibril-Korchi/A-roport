@@ -64,52 +64,24 @@
 
                         </ul>
 
-                    </div><!-- /.nav-collapse -->
+                    </div>
                 </nav>
             </div>
         </div>
     </div>
 </section>
-<form action="../src/controleur/controleur.php" method="post">
-
-    <h3> <table>
+<form method="post" action="../src/controleur/controleur.php">
+    <table>
         <tr>
-            <td>Votre Nom :</td>
-            <td><input type="text" name="nom"></td>
-            <td> |  | </td>
-            <td>Votre rue:</td>
-            <td><input type="text" name="rue"></td>
-        </tr>
-        <tr><td><br></td><td></td><td> |  | </td></tr>
-        <tr>
-            <td>Votre Prénom</td>
-            <td><input type="text" name="prenom"></td>
-            <td> |  | </td>
-            <td>Votre Code Postal:</td>
-            <td><input type="text" name="cp"></td>
-        </tr>
-        <tr><td><br></td><td></td><td> |  | </td></tr>
-        <tr>
-            <td>Votre email:</td>
-            <td><input type="email" name="email"></td>
-            <td> |  | </td>
-            <td>Votre Ville</td>
-            <td><input type="text" name="ville"></td>
-        </tr>
-        <tr><td><br></td><td></td><td> |  | </td></tr>
-        <tr>
-            <td>Votre date de Naissance</td>
-            <td><input type="date" name="daten"></td>
-            <td> |  | </td>
-            <td><input type="text" name="status" value="Client" hidden="hidden"></td>
+            <td>Date de Début</td>
+            <td><input type="date" name="date_debut"></td>
         </tr>
         <tr>
-            <td><br></td>
+            <td>Date de Fin</td>
+            <td><input type="date" name="date_fin"></td>
         </tr>
         <tr>
-            <td><button type="reset" class="btn btn-outline-primary">Réinitialiser</button> </td>
-            <td><input type="submit" class="btn btn-outline-primary" name="inscription" value="Inscription"></td>
+            <td><input type="submit" name="repos" value="Valider"></td>
         </tr>
-    </table></h3>
+    </table>
 </form>
-</body></html>

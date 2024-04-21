@@ -28,7 +28,7 @@
         <div class="top_2 clearfix">
           <div class="col-sm-3">
             <div class="top_2_left">
-              <h1><a href="Siteweb_Client.php">CINEMA ZONE <span>BOOKING</span></a></h1>
+              <h1><a href="Siteweb_Client.php"> SHUMANAIR </a></h1>
             </div>
           </div>
           <div class="col-sm-9">
@@ -64,9 +64,12 @@
 
             </ul>
 
-          </div><!-- /.nav-collapse -->
+          </div>
         </nav>
       </div>
     </div>
   </div>
 </section>
+<?php
+
+

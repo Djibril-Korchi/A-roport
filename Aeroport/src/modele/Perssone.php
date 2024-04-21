@@ -85,7 +85,80 @@ class Perssone
     {
         return $this->mdp_provisoire;
     }
-    public function setMdp($mdp_p,$mdp){
+
+    /**
+     * @param mixed $nom
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+    }
+
+    /**
+     * @param mixed $prenom
+     */
+    public function setPrenom($prenom)
+    {
+        $this->prenom = $prenom;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @param mixed $daten
+     */
+    public function setDaten($daten)
+    {
+        $this->daten = $daten;
+    }
+
+    /**
+     * @param mixed $adresse
+     */
+    public function setAdresse($adresse)
+    {
+        $this->adresse = $adresse;
+    }
+
+    /**
+     * @param mixed $ville
+     */
+    public function setVille($ville)
+    {
+        $this->ville = $ville;
+    }
+
+    /**
+     * @param mixed $cp
+     */
+    public function setCp($cp)
+    {
+        $this->cp = $cp;
+    }
+
+    /**
+     * @param mixed $mdp
+     */
+    public function setMdp($mdp)
+    {
+        $this->mdp = $mdp;
+    }
+
+    /**
+     * @param mixed $mdp_provisoire
+     */
+    public function setMdpProvisoire($mdp_provisoire)
+    {
+        $this->mdp_provisoire = $mdp_provisoire;
+    }
+
+    public function setNewMdp($mdp_p,$mdp){
         $bdd = new Bdd();
         $req=$bdd->getBdd()->prepare("UPDATE user SET mdp_provisoire=:mdp_p and mdp=:mdp where mdp_provisoire=:mdp_provisoire");
         $req->execute(array(

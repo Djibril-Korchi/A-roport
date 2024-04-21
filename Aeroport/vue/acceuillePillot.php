@@ -83,7 +83,8 @@
 
           <div class="collapse navbar-collapse js-navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li><a class="font_tag active_tag" href="acceuille.php">Vol</a></li>
+              <li><a class="font_tag active_tag" href="acceuillePillot.php">Vol</a></li>
+              <li><a class="font_tag active_tag" href="">Repos</a></li>
               <li><a class="font_tag active_tag" href="">Mon Compte</a></li>
               <li><a class="font_tag active_tag" href="user.php">Deconnexion</a></li>
             </ul>
@@ -98,13 +99,11 @@
 <table id="datatable">
     <thead>
     <tr>
-        <th>Compagnie</th>
         <th>Destination</th>
         <th>Aéroport de départ</th>
         <th>Aéroport de destination</th>
         <th>Heure de départ</th>
         <th>Heure d'arriver</th>
-        <th>Prix</th>
 
     </tr>
     </thead>
@@ -113,17 +112,11 @@
     foreach ($liste as $element){
     ?>
     <tr>
-        <td><?= $element['c.libelle'] ?></td>
-        <td><?= $element['v.ville_arriver'] ?></td>
-        <td><?= $element['v.ville_depart'] ?></td>
-        <td><?= $element['v.destination'] ?></td>
-        <td><?= $element['v.heure_depart'] ?></td>
-        <td><?= $element['v.heure_arriver'] ?></td>
-        <td><?= $element['v.prix'] ?></td>
-        <td> <form method="post" action="../src/controleur/controleur.php">
-                <input type="text" value="<?=$element['v.id_vol']?>" name="id" hidden="hidden"  >
-                <input type="submit" value="reserver">
-            </form> </td>
+        <td><?= $element['ville_arriver'] ?></td>
+        <td><?= $element['ville_depart'] ?></td>
+        <td><?= $element['destination'] ?></td>
+        <td><?= $element['heure_depart'] ?></td>
+        <td><?= $element['heure_arriver'] ?></td>
         </tr>
     <?php
     }
@@ -137,8 +130,5 @@
         $('#datatable').DataTable();
     });
 </script>
-
-
-
-</body>
+'</body>
 </html>

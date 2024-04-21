@@ -88,7 +88,7 @@ class Pillot extends Perssone {
                 'r'=>$this->getAdresse(),
                 'v'=>$this->getVille(),
                 'cp'=>$this->getCp(),
-                'mdp_p'=>$this->getMdp(),
+                'mdp_p'=>uniqid(),
                 'status'=>"pillot"
             ));
 
@@ -189,7 +189,6 @@ class Pillot extends Perssone {
         $req->execute(array(
             "ref"=>$this->getIdPillot()
         ));
-        $vol=$req->fetchAll();
-        return $vol;
+        return $req->fetchAll();
     }
 }
