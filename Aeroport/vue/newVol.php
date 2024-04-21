@@ -76,7 +76,7 @@
         </div>
     </div>
 </section>
-<form action="user.php" method="post">
+<form action="../src/controleur/controleur.php" method="post">
     <table>
         <tr>
             <td>Destination</td>
