@@ -148,7 +148,7 @@ class Vol{
     }
     public function listDestination(){
         $bdd = new Bdd();
-        $req=$bdd->getBdd()->query("SELECT ville_arriver FROM vol");
+        $req=$bdd->getBdd()->query("SELECT id_vol,ville_arriver FROM vol");
         return $req->fetchAll();
     }
 }

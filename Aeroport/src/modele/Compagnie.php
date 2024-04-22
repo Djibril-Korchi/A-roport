@@ -7,6 +7,17 @@ class Compagnie extends Perssone{
     private $libelle;
     private $ref_user;
     private $id_aeroport;
+    public function __construct(array $donnees){
+        $this->hydrate($donnees);
+    }
+    public function hydrate(array $donnees){
+        foreach ($donnees as $key => $value){
+            $method = 'set'.ucfirst($key);
+            if (method_exists($this, $method)){
+                $this->$method($value);
+            }
+        }
+    }
 
     /**
      * @return mixed
@@ -72,7 +83,7 @@ class Compagnie extends Perssone{
         return $this->id_aeroport;
     }
 
-    public function inscription(){
+    public function inscriptionChef(){
 
         $bdd = new Bdd();
         $req=$bdd->getBdd()->prepare("SELECT * FROM user WHERE email=:email");
@@ -92,27 +103,26 @@ class Compagnie extends Perssone{
                 'r'=>$this->getAdresse(),
                 'v'=>$this->getVille(),
                 'cp'=>$this->getCp(),
-                'mdp_p'=>$this->getMdp(),
+                'mdp_p'=>uniqid(),
                 'status'=>"Compagnie"
             ));
-
-            $id=$bdd->getBdd()->prepare("SELECT id_user FROM user  WHERE email=:email");
-            $id->execute(array(
-                'email'=>$this->getEmail()
-            ));
-            $reqid=$id->fetchAll();
-            Pillot::setRefUser($reqid['id_user']);
-            $req=$bdd->getBdd()->prepare("INSERT INTO compagnie(libelle, ref_user) VALUES (:libelle,:ref_u)");
-            $req->execute(array(
-                'libelle'=>$this->getLibelle(),
-                'ref_u'=>$reqid['id_user']
-            ));
-
-
 
             header("Location: ../../vue/connection.html");
         }
 
+    }
+    public function NewCompagnie(){
+        $bdd=new \Bdd();
+        $id=$bdd->getBdd()->prepare("SELECT id_user FROM user  WHERE email=:email");
+        $id->execute(array(
+            'email'=>$this->getEmail()
+        ));
+        $reqid=$id->fetchAll();
+        $req=$bdd->getBdd()->prepare("INSERT INTO compagnie(libelle, ref_user) VALUES (:libelle,:ref_u)");
+        $req->execute(array(
+            'libelle'=>$this->getLibelle(),
+            'ref_u'=>$reqid['id_user']
+        ));
     }
     public function connexion(){
         $bdd = new Bdd();

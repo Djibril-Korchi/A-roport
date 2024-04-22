@@ -51,7 +51,7 @@ class Reservation{
         $req1= $bdd->getBdd()->prepare('SELECT v.heure_depart,a.nb_place FROM vol as v INNER JOIN avion as a  ON v.ref_avion = a.id_avion WHERE id_vol=:vol');
 
         $req1->execute(array(
-
+            'vol'=>$this->getRefVol()
         ));
         $res=$req1->fetchAll();
         $date = new DateTime($res['nb_place']);
@@ -69,14 +69,39 @@ class Reservation{
         $requete->execute(array(
             'nb'=>$this->getNbPlace()
         ));
+        header("Location : ../../vue/user/acceuille.php");
     }
     public function removeReservation(){
         $bdd=new Bdd();
-        $req=$bdd->getBdd()->prepare('DELETE FROM reservation WHERE id_reseration=:id and :date not between Date_annulation and (SELECT heure_depart FROM vol where :vol)');
-        $req->execute(array(
+        $req1= $bdd->getBdd()->prepare('SELECT * FROM reservation WHERE id_reseration=:id and :date not between Date_annulation and (SELECT heure_depart FROM vol where :vol)');
+        $req1->execute(array(
             'id'=>$this->getIdReservation(),
             'date'=>checkdate(),
             'vol'=>$this->getRefVol()
         ));
+        $res=$req1->fetchAll();
+        if ($res) {
+            $req = $bdd->getBdd()->prepare('DELETE FROM reservation WHERE id_reseration=:id');
+            $req->execute(array(
+                'id' => $this->getIdReservation(),
+            ));
+            $requete=$bdd->getBdd()->prepare('UPDATE vol SET place_restant=place_restant+:nb WHERE id_vol');
+            $requete->execute(array(
+                'nb'=>$res['nb_place']
+            ));
+            header("Location : ../../vue/user/acceuille.php");
+        }else{
+            header("Location : ../../vue/user/reserver.php");
+        }
+    }
+    public function getReserver(){
+        $bdd=new Bdd();
+
+        $req=$bdd->getBdd()->query("SELECT v.*, c.libelle,r.id_reseration FROM vol as v INNER JOIN avion AS a ON v.ref_avion = a.id_avion INNER JOIN compagnie as c ON a.ref_compagnie = c.id_compagnie INNER JOIN reservation as r ON v.id_vol = r.ref_vol WHERE  r.ref_user=:id");
+
+        $req->execute(array(
+            'id'=>$_SESSION['id_user']
+        ));
+        return $req->fetchAll();
     }
 }

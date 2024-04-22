@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Inscription</title>
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/css/global.css" rel="stylesheet">
-    <link href="../assets/css/index.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.min.css">
-    <link href="../assets/css/css" rel="stylesheet">
-    <link href="../assets/css/css(1)" rel="stylesheet">
-    <script src="../assets/js/jquery-2.1.1.min.js.téléchargement"></script>
+    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../assets/css/global.css" rel="stylesheet">
+    <link href="../../assets/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/font-awesome.min.css">
+    <link href="../../assets/css/css" rel="stylesheet">
+    <link href="../../assets/css/css(1)" rel="stylesheet">
+    <script src="../../assets/js/jquery-2.1.1.min.js.téléchargement"></script>
 
-    <script src="../assets/js/bootstrap.min.js.téléchargement"></script>
+    <script src="../../assets/js/bootstrap.min.js.téléchargement"></script>
 </head>
 
 <body>
@@ -70,20 +70,46 @@
         </div>
     </div>
 </section>
-<form action="../src/controleur/controleur.php" method="post">
-    <table>
+<form action="../../src/controleur/controleur.php" method="post">
+
+    <h3> <table>
         <tr>
-            <td>Email</td>
+            <td>Votre Nom :</td>
+            <td><input type="text" name="nom"></td>
+            <td> |  | </td>
+            <td>Votre rue:</td>
+            <td><input type="text" name="rue"></td>
+        </tr>
+        <tr><td><br></td><td></td><td> |  | </td></tr>
+        <tr>
+            <td>Votre Prénom</td>
+            <td><input type="text" name="prenom"></td>
+            <td> |  | </td>
+            <td>Votre Code Postal:</td>
+            <td><input type="text" name="cp"></td>
+        </tr>
+        <tr><td><br></td><td></td><td> |  | </td></tr>
+        <tr>
+            <td>Votre email:</td>
             <td><input type="email" name="email"></td>
+            <td> |  | </td>
+            <td>Votre Ville</td>
+            <td><input type="text" name="ville"></td>
+        </tr>
+        <tr><td><br></td><td></td><td> |  | </td></tr>
+        <tr>
+            <td>Votre date de Naissance</td>
+            <td><input type="date" name="daten"></td>
+            <td> |  | </td>
+            <td><input type="text" name="status" value="Client" hidden="hidden"></td>
         </tr>
         <tr>
-            <td>Mot de Passe</td>
-            <td><input type="password" name="mdp"></td>
+            <td><br></td>
         </tr>
         <tr>
-            <td><input type="submit" name="connection" value="Connection"></td>
+            <td><button type="reset" class="btn btn-outline-primary">Réinitialiser</button> </td>
+            <td><input type="submit" class="btn btn-outline-primary" name="inscription" value="Inscription"></td>
         </tr>
-    </table>
+    </table></h3>
 </form>
-</body>
-</html>
+</body></html>

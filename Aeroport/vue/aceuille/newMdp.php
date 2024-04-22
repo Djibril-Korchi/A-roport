@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Inscription</title>
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/css/global.css" rel="stylesheet">
-    <link href="../assets/css/index.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.min.css">
-    <link href="../assets/css/css" rel="stylesheet">
-    <link href="../assets/css/css(1)" rel="stylesheet">
-    <script src="../assets/js/jquery-2.1.1.min.js.téléchargement"></script>
+    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../assets/css/global.css" rel="stylesheet">
+    <link href="../../assets/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/font-awesome.min.css">
+    <link href="../../assets/css/css" rel="stylesheet">
+    <link href="../../assets/css/css(1)" rel="stylesheet">
+    <script src="../../assets/js/jquery-2.1.1.min.js.téléchargement"></script>
 
-    <script src="../assets/js/bootstrap.min.js.téléchargement"></script>
+    <script src="../../assets/js/bootstrap.min.js.téléchargement"></script>
 </head>
 
 <body>
@@ -28,7 +28,7 @@
                 <div class="top_2 clearfix">
                     <div class="col-sm-3">
                         <div class="top_2_left">
-                            <h1><a href="Siteweb_Client.php">ShumanAir<span></span></a></h1>
+                            <h1><a href="acceuille.php"> ShumanAir</a></h1>
                         </div>
                     </div>
                     <div class="col-sm-9">
@@ -64,52 +64,24 @@
 
                         </ul>
 
-                    </div><!-- /.nav-collapse -->
+                    </div>
                 </nav>
             </div>
         </div>
     </div>
 </section>
-<form action="../src/controleur/controleur.php" method="post">
+<form method="post" action="../../src/controleur/controleur.php">
+    <table>
+        <tr>
+            <td>Mot de Passe Actuel</td>
+            <td><input type="text" name="mdp_p"></td>
+        </tr>
+        <tr>
+            <td>Nouveau Mot de Passe</td>
+            <td><input type="text" name="newmdp"></td>
+        </tr><tr>
 
-    <h3> <table>
-        <tr>
-            <td>Votre Nom :</td>
-            <td><input type="text" name="nom"></td>
-            <td> |  | </td>
-            <td>Votre rue:</td>
-            <td><input type="text" name="rue"></td>
+            <td><input type="submit" name="mdp" value="Valider"></td>
         </tr>
-        <tr><td><br></td><td></td><td> |  | </td></tr>
-        <tr>
-            <td>Votre Prénom</td>
-            <td><input type="text" name="prenom"></td>
-            <td> |  | </td>
-            <td>Votre Code Postal:</td>
-            <td><input type="text" name="cp"></td>
-        </tr>
-        <tr><td><br></td><td></td><td> |  | </td></tr>
-        <tr>
-            <td>Votre email:</td>
-            <td><input type="email" name="email"></td>
-            <td> |  | </td>
-            <td>Votre Ville</td>
-            <td><input type="text" name="ville"></td>
-        </tr>
-        <tr><td><br></td><td></td><td> |  | </td></tr>
-        <tr>
-            <td>Votre date de Naissance</td>
-            <td><input type="date" name="daten"></td>
-            <td> |  | </td>
-            <td><input type="text" name="status" value="Client" hidden="hidden"></td>
-        </tr>
-        <tr>
-            <td><br></td>
-        </tr>
-        <tr>
-            <td><button type="reset" class="btn btn-outline-primary">Réinitialiser</button> </td>
-            <td><input type="submit" class="btn btn-outline-primary" name="inscription" value="Inscription"></td>
-        </tr>
-    </table></h3>
+    </table>
 </form>
-</body></html>

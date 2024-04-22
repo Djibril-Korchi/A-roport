@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Inscription</title>
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/css/global.css" rel="stylesheet">
-    <link href="../assets/css/index.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.min.css">
-    <link href="../assets/css/css" rel="stylesheet">
-    <link href="../assets/css/css(1)" rel="stylesheet">
-    <script src="../assets/js/jquery-2.1.1.min.js.téléchargement"></script>
+    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../assets/css/global.css" rel="stylesheet">
+    <link href="../../assets/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/font-awesome.min.css">
+    <link href="../../assets/css/css" rel="stylesheet">
+    <link href="../../assets/css/css(1)" rel="stylesheet">
+    <script src="../../assets/js/jquery-2.1.1.min.js.téléchargement"></script>
 
-    <script src="../assets/js/bootstrap.min.js.téléchargement"></script>
+    <script src="../../assets/js/bootstrap.min.js.téléchargement"></script>
 </head>
 
 <body>
