@@ -52,7 +52,7 @@
         <div class="top_2 clearfix">
           <div class="col-sm-3">
             <div class="top_2_left">
-              <h1><a href="AcceuilAdmin.php">ShumanAir</a></h1>
+              <h1><a href="acceuille.php">ShumanAir</a></h1>
             </div>
           </div>
           <div class="col-sm-9">
@@ -77,17 +77,17 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="AcceuilAdmin.php">ShumanAir</a>
+            <a class="navbar-brand" href="acceuille.php">ShumanAir</a>
           </div>
 
 
           <div class="collapse navbar-collapse js-navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li><a class="font_tag active_tag" href="Inscription.html">Nouvelle Compagnie</a></li>
-              <li><a class="font_tag active_tag" href="InscriptionAeroport.html">Nouvelle Aeroport</a></li>
-              <li><a class="font_tag active_tag" href="lier.php">Lier Aeroport et Compagnie</a></li>
-              <li><a class="font_tag active_tag" href="modif.php">Mon Compte</a></li>
-              <li><a class="font_tag active_tag" href="../../src/controleur/controleur.php">Deconnexion</a></li>
+                <li><a class="font_tag active_tag" href="Recherche.php">Rechercher Vol</a></li>
+                <li><a class="font_tag active_tag" href="reserver.php">Reservation</a></li>
+                <li><a class="font_tag active_tag" href="annulerReservation.php">Annuler Reservation</a></li>
+                <li><a class="font_tag active_tag" href="modif.php">Mon Compte</a></li>
+                <li><a class="font_tag active_tag" href="../../src/controleur/controleur.php">Deconnexion</a></li>
             </ul>
 
           </div>
@@ -113,17 +113,18 @@
     <tbody>
     <?php
     foreach ($liste as $element){
+
     ?>
     <tr>
-        <td><?= $element['c.libelle'] ?></td>
-        <td><?= $element['v.ville_arriver'] ?></td>
-        <td><?= $element['v.ville_depart'] ?></td>
-        <td><?= $element['v.destination'] ?></td>
-        <td><?= $element['v.heure_depart'] ?></td>
-        <td><?= $element['v.heure_arriver'] ?></td>
-        <td><?= $element['v.prix'] ?></td>
-        <td> <form method="post" action="../../src/controleur/controleur.php">
-                <input type="text" value="<?=$element['v.id_vol']?>" name="id" hidden="hidden"  >
+        <td><?= $element['libelle'] ?></td>
+        <td><?= $element['ville_arriver'] ?></td>
+        <td><?= $element['ville_depart'] ?></td>
+        <td><?= $element['destination'] ?></td>
+        <td><?= $element['heure_depart'] ?></td>
+        <td><?= $element['heure_arriver'] ?></td>
+        <td><?= $element['prix'] ?></td>
+        <td><form method="post" action="Reservation.php">
+                <input type="text" value="<?=$element['id_vol']?>" name="id" hidden="hidden"  >
                 <input type="submit" value="reserver">
             </form> </td>
         </tr>

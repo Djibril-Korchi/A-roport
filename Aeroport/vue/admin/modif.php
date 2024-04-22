@@ -100,13 +100,68 @@
 <form action="../../src/controleur/controleur.php" method="post">
 
     <h3> <table>
+
+            <?php
+            $user = new \modele\User([]);
+            $donne=$user->user();
+            var_dump($_SESSION);
+            foreach ($donne as $element) {
+                echo '
+                <tr>
+            <td>Votre Nom :</td>
+            <td><input type='."text".' name='."nom".' value='.$element['nom'].'></td>
+            <td> |  | </td>
+        
+            <td>Votre Prénom</td>
+            <td><input type='."text".' name='."prenom".' value='.$element['prenom'].'></td>
+            <td> |  | </td>
+            
+            <td>Votre rue:</td>
+            <td><input type='."text".' name='."rue".' value='.$element['rue'].'></td>
+        </tr>
+        <tr><td><br></td><td></td><td> |  | </td></tr>
         <tr>
-            <td>Nom de l'aéroport</td>
-            <td><input type="text" name="nom"></td>
+            <td>Votre Code Postal:</td>
+            <td><input type='."text".' name='."cp".' value='.$element['cp'].'></td>
+        </tr>
+        <tr><td><br></td><td></td><td> |  | </td></tr>
+        <tr>
+            <td>Votre email:</td>
+            <td><input type='."text".' name='."email".' value='.$element['email'].'></td>
+            <td> |  | </td>
+            <td>Votre Ville</td>
+            <td><input type='."text".' name='."ville".' value='.$element['ville'].'></td>
+        </tr>
+        <tr><td><br></td><td></td><td> |  | </td></tr>
+        <tr>
+            <td>Votre date de Naissance</td>
+            <td><input type='."text".' name='."daten".' value='.$element['daten'].'></td>
+            
+            <td> |  | </td>
+            <td>Votre Mot de Passe</td>
+            <td><input type='."text".' name='."daten".' value='.$element['mdp'].'></td>
+            ';
+            }
+            ?>
         </tr>
         <tr>
-            <td><input type="submit" class="btn btn-outline-primary" name="inscriptionA" value="Inscription"></td>
+            <td><br></td>
         </tr>
+        <tr>
+            <td><button type='reset' class='btn btn-outline-primary'>Réinitialiser</button> </td>
+            <td><input type='submit' class='btn btn-outline-primary' name='edit' value='Modifier'></td>
+        </tr>
+
     </table></h3>
 </form>
 </body></html>
+
+
+<form method="post" action="Modifier_client.php">
+    <table>
+
+
+ 
+
+    </table>
+</form>

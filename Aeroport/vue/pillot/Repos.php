@@ -59,8 +59,10 @@
 
                     <div class="collapse navbar-collapse js-navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a class="font_tag active_tag" href="Connexion.html">Connexion</a></li>
-                            <li><a class="font_tag active_tag" href="Inscription.html">Inscription</a></li>
+                            <li><a class="font_tag active_tag" href="acceuillePillot.php">Vol</a></li>
+                            <li><a class="font_tag active_tag" href="">Repos</a></li>
+                            <li><a class="font_tag active_tag" href="">Mon Compte</a></li>
+                            <li><a class="font_tag active_tag" href="user.php">Deconnexion</a></li>
 
                         </ul>
 

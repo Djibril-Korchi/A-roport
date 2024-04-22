@@ -46,12 +46,22 @@ class Avion {
         $req->execute(array(
             'matricule' => $this->getMatricule(),
             'nb' => $this->getNbPlace(),
-            'ref' => $this->getRefCompagnie()
+            'ref' => $this->$_SESSION['id_compagnie']
         ));
     }
     public function avion(){
         $bdd = new Bdd();
         $req = $bdd->getBdd()->prepare('SELECT matricule FROM avion');
 
+    }
+    public function avionCompagnie(){
+        $bdd=new \Bdd();
+
+        $bdd=new \Bdd();
+        $req=$bdd->getBdd()->prepare('SELECT * FROM avion WHERE ref_compagnie=:ref');
+        $req->execute(array(
+            'ref'=>$this->$_SESSION['libelle']
+        ));
+        return $req->fetchAll();
     }
 }

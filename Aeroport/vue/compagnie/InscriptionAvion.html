@@ -15,13 +15,6 @@
     <script src="../../assets/js/jquery-2.1.1.min.js.téléchargement"></script>
 
     <script src="../../assets/js/bootstrap.min.js.téléchargement"></script>
-    <?php
-    include "../../src/bdd/Bdd.php";
-    include "../../src/modele/Perssone.php";
-    include "../../src/modele/Pillot.php";
-    include "../../src/modele/Avion.php";
-
-    ?>
 </head>
 
 <body>
@@ -35,7 +28,7 @@
                 <div class="top_2 clearfix">
                     <div class="col-sm-3">
                         <div class="top_2_left">
-                            <h1><a href="acceuilleVol.php">CINEMA ZONE <span>BOOKING</span></a></h1>
+                            <h1><a href="Siteweb_Client.php">ShumanAir <span></span></a></h1>
                         </div>
                     </div>
                     <div class="col-sm-9">
@@ -66,9 +59,10 @@
 
                     <div class="collapse navbar-collapse js-navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a class="font_tag active_tag" href="newVol.php">Planifier un vol</a></li>
+                            <li><a class="font_tag active_tag" href="InscriptionPillot.html">Recruter un Pillot</a></li>
+                            <li><a class="font_tag active_tag" href="InscriptionAvion.html">Recruter un Avion</a></li>
+                            <li><a class="font_tag active_tag" href="modif.php">Mon Compte</a></li>
                             <li><a class="font_tag active_tag" href="../../src/controleur/controleur.php">Deconnexion</a></li>
-
                         </ul>
 
                     </div><!-- /.nav-collapse -->
@@ -78,73 +72,22 @@
     </div>
 </section>
 <form action="../../src/controleur/controleur.php" method="post">
-    <table>
+
+    <h3> <table>
         <tr>
-            <td>Ville d'arriver</td>
-            <td><input type="text" name="ville" </td>
+            <td>Votre Matricule :</td>
+            <td><input type="text" name="matricule"></td>
+            <td> |  | </td>
+            <td>Votre nb_place:</td>
+            <td><input type="text" name="nb"></td>
         </tr>
         <tr>
-            <td>Aéroport départ</td>
-            <td><select name="depart">
-                    <?php
-                    $aeroport=new \modele\Aeroport();
-                    $libelle=$aeroport->listDestination();
-                    foreach ($libelle as $element){
-                        echo "<a></a><optiont name='".$element['libelle']."'>".$element['libelle']." </optiont>";
-                    }
-                    ?>
-                </select></td>
+            <td><br></td>
         </tr>
         <tr>
-            <td>Aéroport arriver</td>
-            <td><select name="arriver">
-                    <?php
-                    $aeroport=new \modele\Aeroport();
-                    $libelle=$aeroport->listDestination();
-                    foreach ($libelle as $element){
-                        echo "<a></a><optiont name='".$element['libelle']."'>".$element['libelle']." </optiont>";
-                    }
-                    ?>
-                </select></td>
+            <td><button type="reset" class="btn btn-outline-primary">Réinitialiser</button> </td>
+            <td><input type="submit" class="btn btn-outline-primary" name="inscriptionAvion" value="Inscription"></td>
         </tr>
-        <tr>
-            <td>Date et heure de arriver</td>
-            <td><input type="datetime-local" name="datea"></td>
-        </tr>
-        <tr>
-            <td>Date et heure de départ</td>
-            <td><input type="datetime-local" name="dated"></td>
-        </tr>
-        <tr>
-            <td>Avion</td>
-            <td><select name="avion">
-                    <?php
-                    $avion=new \modele\Avion();
-                    $id=$avion->avion();
-                    foreach ($libelle as $element){
-                        echo "<a></a><optiont name='".$element['matricule']."'>".$element['matricule']." </optiont>";
-                    }
-                    ?>
-                </select></td>
-        </tr>
-        <tr>
-            <td>Pillot</td>
-            <td><select name="pillot">
-                    <?php
-                    $pillot=new \modele\Pillot([]);
-                    $id=$avion->avion();
-                    foreach ($libelle as $element){
-                        echo "<a></a><optiont name='".$element['nom']."'>".$element['nom']." </optiont>";
-                    }
-                    ?>
-                </select></td>
-        </tr>
-        <tr>
-            <td>Prix</td>
-            <td><input type="number" name="prix">€</td>
-        </tr>
-        <tr>
-            <td><input type="submit" name="newVol" value="New"></td>
-        </tr>
-    </table>
+    </table></h3>
 </form>
+</body></html>

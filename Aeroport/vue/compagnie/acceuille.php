@@ -37,8 +37,8 @@
 
     include "../../src/modele/Vol.php";
     include "../../src/bdd/Bdd.php";
-    $vol = new Vol([]);
-    $liste=$vol->getVol();
+    $avion = new \modele\Avion([]);
+    $liste=$avion->avionCompagnie();
     ?>
 </head>
 
@@ -52,7 +52,7 @@
         <div class="top_2 clearfix">
           <div class="col-sm-3">
             <div class="top_2_left">
-              <h1><a href="AcceuilAdmin.php">ShumanAir</a></h1>
+              <h1><a href="acceuille.php">ShumanAir</a></h1>
             </div>
           </div>
           <div class="col-sm-9">
@@ -77,17 +77,16 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="AcceuilAdmin.php">ShumanAir</a>
+            <a class="navbar-brand" href="acceuille.php">ShumanAir</a>
           </div>
 
 
           <div class="collapse navbar-collapse js-navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li><a class="font_tag active_tag" href="Inscription.html">Nouvelle Compagnie</a></li>
-              <li><a class="font_tag active_tag" href="InscriptionAeroport.html">Nouvelle Aeroport</a></li>
-              <li><a class="font_tag active_tag" href="lier.php">Lier Aeroport et Compagnie</a></li>
-              <li><a class="font_tag active_tag" href="modif.php">Mon Compte</a></li>
-              <li><a class="font_tag active_tag" href="../../src/controleur/controleur.php">Deconnexion</a></li>
+                <li><a class="font_tag active_tag" href="InscriptionPillot.html">Recruter un Pillot</a></li>
+                <li><a class="font_tag active_tag" href="InscriptionAvion.html">Recruter un Avion</a></li>
+                <li><a class="font_tag active_tag" href="modif.php">Mon Compte</a></li>
+                <li><a class="font_tag active_tag" href="../../src/controleur/controleur.php">Deconnexion</a></li>
             </ul>
 
           </div>
@@ -100,30 +99,23 @@
 <table id="datatable">
     <thead>
     <tr>
-        <th>Compagnie</th>
-        <th>Destination</th>
-        <th>Aéroport de départ</th>
-        <th>Aéroport de destination</th>
-        <th>Heure de départ</th>
-        <th>Heure d'arriver</th>
-        <th>Prix</th>
+        <th>matricule</th>
+        <th>Nb_place</th>
+
 
     </tr>
     </thead>
     <tbody>
     <?php
     foreach ($liste as $element){
+
     ?>
     <tr>
-        <td><?= $element['c.libelle'] ?></td>
-        <td><?= $element['v.ville_arriver'] ?></td>
-        <td><?= $element['v.ville_depart'] ?></td>
-        <td><?= $element['v.destination'] ?></td>
-        <td><?= $element['v.heure_depart'] ?></td>
-        <td><?= $element['v.heure_arriver'] ?></td>
-        <td><?= $element['v.prix'] ?></td>
-        <td> <form method="post" action="../../src/controleur/controleur.php">
-                <input type="text" value="<?=$element['v.id_vol']?>" name="id" hidden="hidden"  >
+        <td><?= $element['matricule'] ?></td>
+        <td><?= $element['nb_place'] ?></td>
+
+        <td><form method="post" action="Reservation.php">
+                <input type="text" value="<?=$element['id_vol']?>" name="id" hidden="hidden"  >
                 <input type="submit" value="reserver">
             </form> </td>
         </tr>

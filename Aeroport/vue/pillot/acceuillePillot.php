@@ -35,8 +35,8 @@
 
     use modele\Vol;
 
-    include "../src/modele/Vol.php";
-    include "../src/bdd/Bdd.php";
+    include "../../src/modele/Vol.php";
+    include "../../src/bdd/Bdd.php";
     $vol = new Vol([]);
     $liste=$vol->getVol();
     ?>
@@ -52,7 +52,7 @@
         <div class="top_2 clearfix">
           <div class="col-sm-3">
             <div class="top_2_left">
-              <h1><a href="Siteweb_Client.php.php">ShumanAir</a></h1>
+              <h1><a href="acceuillePillot.php">ShumanAir</a></h1>
             </div>
           </div>
           <div class="col-sm-9">

@@ -35,8 +35,8 @@
 
     use modele\Vol;
 
-    include "../src/modele/Vol.php";
-    include "../src/bdd/Bdd.php";
+    include "../../src/modele/Vol.php";
+    include "../../src/bdd/Bdd.php";
     $vol = new Vol([]);
     $liste=$vol->getVol();
     ?>

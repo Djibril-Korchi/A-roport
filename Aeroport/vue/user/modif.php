@@ -61,7 +61,8 @@
                     <div class="collapse navbar-collapse js-navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
                             <li><a class="font_tag active_tag" href="Recherche.php">Rechercher Vol</a></li>
-                            <li><a class="font_tag active_tag" href="reserver.php.php">Reservation</a></li>
+                            <li><a class="font_tag active_tag" href="reserver.php">Reservation</a></li>
+                            <li><a class="font_tag active_tag" href="annulerReservation.php">Reservation</a></li>
                             <li><a class="font_tag active_tag" href="modif.php">Mon Compte</a></li>
                             <li><a class="font_tag active_tag" href="../../src/controleur/controleur.php">Deconnexion</a></li>
                         </ul>
@@ -72,13 +73,14 @@
         </div>
     </div>
 </section>
-<form action="../src/controleur/controleur.php" method="post">
+<form action="../../src/controleur/controleur.php" method="post">
 
     <h3> <table>
 
             <?php
-            $user = new \modele\User();
+            $user = new \modele\User([]);
             $donne=$user->user();
+            var_dump($_SESSION);
             foreach ($donne as $element) {
                 echo '
                 <tr>

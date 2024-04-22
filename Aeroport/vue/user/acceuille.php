@@ -35,8 +35,8 @@
 
     use modele\Vol;
 
-    include "../src/modele/Vol.php";
-    include "../src/bdd/Bdd.php";
+    include "../../src/modele/Vol.php";
+    include "../../src/bdd/Bdd.php";
     $vol = new Vol([]);
     $liste=$vol->getVol();
     ?>
@@ -83,10 +83,11 @@
 
           <div class="collapse navbar-collapse js-navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li><a class="font_tag active_tag" href="Recherche.php">Rechercher Vol</a></li>
-              <li><a class="font_tag active_tag" href="reserver.php.php">Reservation</a></li>
-              <li><a class="font_tag active_tag" href="modif.php">Mon Compte</a></li>
-              <li><a class="font_tag active_tag" href="../../src/controleur/controleur.php">Deconnexion</a></li>
+                <li><a class="font_tag active_tag" href="Recherche.php">Rechercher Vol</a></li>
+                <li><a class="font_tag active_tag" href="reserver.php">Reservation</a></li>
+                <li><a class="font_tag active_tag" href="annulerReservation.php">Reservation</a></li>
+                <li><a class="font_tag active_tag" href="modif.php">Mon Compte</a></li>
+                <li><a class="font_tag active_tag" href="../../src/controleur/controleur.php">Deconnexion</a></li>
             </ul>
 
           </div>
@@ -112,17 +113,18 @@
     <tbody>
     <?php
     foreach ($liste as $element){
+
     ?>
     <tr>
-        <td><?= $element['c.libelle'] ?></td>
-        <td><?= $element['v.ville_arriver'] ?></td>
-        <td><?= $element['v.ville_depart'] ?></td>
-        <td><?= $element['v.destination'] ?></td>
-        <td><?= $element['v.heure_depart'] ?></td>
-        <td><?= $element['v.heure_arriver'] ?></td>
-        <td><?= $element['v.prix'] ?></td>
+        <td><?= $element['libelle'] ?></td>
+        <td><?= $element['ville_arriver'] ?></td>
+        <td><?= $element['ville_depart'] ?></td>
+        <td><?= $element['destination'] ?></td>
+        <td><?= $element['heure_depart'] ?></td>
+        <td><?= $element['heure_arriver'] ?></td>
+        <td><?= $element['prix'] ?></td>
         <td><form method="post" action="Reservation.php">
-                <input type="text" value="<?=$element['v.id_vol']?>" name="id" hidden="hidden"  >
+                <input type="text" value="<?=$element['id_vol']?>" name="id" hidden="hidden"  >
                 <input type="submit" value="reserver">
             </form> </td>
         </tr>

@@ -52,7 +52,7 @@
         <div class="top_2 clearfix">
           <div class="col-sm-3">
             <div class="top_2_left">
-              <h1><a href="Siteweb_Client.php.php">ShumanAir</a></h1>
+              <h1><a href="acceuilleVol.php">ShumanAir</a></h1>
             </div>
           </div>
           <div class="col-sm-9">
@@ -77,15 +77,14 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="Siteweb_Client.php">ShumanAir</a>
+            <a class="navbar-brand" href="acceuilleVol.php">ShumanAir</a>
           </div>
 
 
           <div class="collapse navbar-collapse js-navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li><a class="font_tag active_tag" href="acceuillePillot.php">Planifier un vol</a></li>
-              <li><a class="font_tag active_tag" href="">Mon Compte</a></li>
-              <li><a class="font_tag active_tag" href="user.php">Deconnexion</a></li>
+                  <li><a class="font_tag active_tag" href="newVol.php">Planifier un vol</a></li>
+                  <li><a class="font_tag active_tag" href="../../src/controleur/controleur.php">Deconnexion</a></li>
             </ul>
 
           </div>

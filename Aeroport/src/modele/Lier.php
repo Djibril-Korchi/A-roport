@@ -27,14 +27,16 @@ class Lier{
         $req->execute(array(
             'libelle'=>$this->getRefC()
         ));
+        $res=$req->fetchAll();
         $requete=$bdd->getBdd()->prepare('SELECT id_aeroport FROM aeroport Where libelle=:libelle');
         $requete->execute(array(
             'libelle'=>$this->getRefA()
         ));
+        $res1=$req->fetchAll();
         $lier=$bdd->getBdd()->prepare('INSERT INTO lier VALUES (:ref_c,:ref_a)');
         $lier->execute(array(
-            'ref_c'=>$this->getRefC(),
-            'ref_a'=>$this->getRefA()
+            'ref_c'=>$res[0],
+            'ref_a'=>$res1[0]
         ));
     }
 }

@@ -100,13 +100,41 @@
 <form action="../../src/controleur/controleur.php" method="post">
 
     <h3> <table>
-        <tr>
-            <td>Nom de l'aéroport</td>
-            <td><input type="text" name="nom"></td>
-        </tr>
-        <tr>
-            <td><input type="submit" class="btn btn-outline-primary" name="inscriptionA" value="Inscription"></td>
-        </tr>
-    </table></h3>
+
+            <?php
+            $aeroport = new \modele\Aeroport([]);
+            $donne=$aeroport->listLibelle();
+            $compagnie = new \modele\Compagnie([]);
+            $res=$compagnie->listLibelle();
+            ?>
+                <tr>
+            <td>Aeroport :</td>
+            <td><select name="ref_a">
+                    <?php
+            foreach ($donne as $element) {
+                echo '
+            <option name=' . $element['libelle'] . '>'.$element['libelle'].'</option>';
+            }
+            ?>
+            </select></td>
+            <td> |  | </td>
+            <td>Compagnie :</td>
+                    <td><select name="ref_c">
+                            <?php
+                            foreach ($res as $element) {
+                                echo '
+            <option name=' . $element['libelle'] . '>'.$element['libelle'].'</option>';
+                            }
+                            ?>
+                        </select></td>
+            <tr>
+                <td><br></td>
+            </tr>
+            <tr>
+                <td><input type='submit' class='btn btn-outline-primary' name='lier' value='Lier'></td>
+            </tr>
+
+        </table></h3>
 </form>
 </body></html>
+</form>

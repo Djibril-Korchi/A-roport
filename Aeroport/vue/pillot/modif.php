@@ -19,6 +19,7 @@
 
 <body>
 
+<body onload="startTime()">
 <section id="top">
     <div class="container">
         <div class="row">
@@ -28,7 +29,7 @@
                 <div class="top_2 clearfix">
                     <div class="col-sm-3">
                         <div class="top_2_left">
-                            <h1><a href="Siteweb_Client.php">ShumanAir<span></span></a></h1>
+                            <h1><a href="acceuille.php">ShumanAir</a></h1>
                         </div>
                     </div>
                     <div class="col-sm-9">
@@ -53,64 +54,89 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="https://www.templateonweb.com/upload/aedemodir/9872ed9fc22fc182d371c3e9ed316094/#">CINEMA ZONE <span>BOOKING</span></a>
+                        <a class="navbar-brand" href="acceuille.php">ShumanAir</a>
                     </div>
 
 
                     <div class="collapse navbar-collapse js-navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a class="font_tag active_tag" href="Connexion.html">Connexion</a></li>
-                            <li><a class="font_tag active_tag" href="Inscription.html">Inscription</a></li>
-
+                            < <li><a class="font_tag active_tag" href="acceuillePillot.php">Vol</a></li>
+                            <li><a class="font_tag active_tag" href="">Repos</a></li>
+                            <li><a class="font_tag active_tag" href="">Mon Compte</a></li>
+                            <li><a class="font_tag active_tag" href="user.php">Deconnexion</a></li>
                         </ul>
 
-                    </div><!-- /.nav-collapse -->
+                    </div>
                 </nav>
             </div>
         </div>
     </div>
 </section>
-<form action="../src/controleur/controleur.php" method="post">
+<form action="../../src/controleur/controleur.php" method="post">
 
     <h3> <table>
-        <tr>
+
+            <?php
+            $user = new \modele\User([]);
+            $donne=$user->user();
+            var_dump($_SESSION);
+            foreach ($donne as $element) {
+                echo '
+                <tr>
             <td>Votre Nom :</td>
-            <td><input type="text" name="nom"></td>
+            <td><input type='."text".' name='."nom".' value='.$element['nom'].'></td>
             <td> |  | </td>
+        
+            <td>Votre Prénom</td>
+            <td><input type='."text".' name='."prenom".' value='.$element['prenom'].'></td>
+            <td> |  | </td>
+            
             <td>Votre rue:</td>
-            <td><input type="text" name="rue"></td>
+            <td><input type='."text".' name='."rue".' value='.$element['rue'].'></td>
         </tr>
         <tr><td><br></td><td></td><td> |  | </td></tr>
         <tr>
-            <td>Votre Prénom</td>
-            <td><input type="text" name="prenom"></td>
-            <td> |  | </td>
             <td>Votre Code Postal:</td>
-            <td><input type="text" name="cp"></td>
+            <td><input type='."text".' name='."cp".' value='.$element['cp'].'></td>
         </tr>
         <tr><td><br></td><td></td><td> |  | </td></tr>
         <tr>
             <td>Votre email:</td>
-            <td><input type="email" name="email"></td>
+            <td><input type='."text".' name='."email".' value='.$element['email'].'></td>
             <td> |  | </td>
             <td>Votre Ville</td>
-            <td><input type="text" name="ville"></td>
+            <td><input type='."text".' name='."ville".' value='.$element['ville'].'></td>
         </tr>
         <tr><td><br></td><td></td><td> |  | </td></tr>
         <tr>
             <td>Votre date de Naissance</td>
-            <td><input type="date" name="daten"></td>
+            <td><input type='."text".' name='."daten".' value='.$element['daten'].'></td>
+            
             <td> |  | </td>
-            <td>Nom de l'entreprise</td>
-            <td><input type="text" name="name"></td>
+            <td>Votre Mot de Passe</td>
+            <td><input type='."text".' name='."daten".' value='.$element['mdp'].'></td>
+            ';
+            }
+            ?>
         </tr>
         <tr>
             <td><br></td>
         </tr>
         <tr>
-            <td><button type="reset" class="btn btn-outline-primary">Réinitialiser</button> </td>
-            <td><input type="submit" class="btn btn-outline-primary" name="inscription" value="Inscription"></td>
+            <td><button type='reset' class='btn btn-outline-primary'>Réinitialiser</button> </td>
+            <td><input type='submit' class='btn btn-outline-primary' name='edit' value='Modifier'></td>
         </tr>
+
     </table></h3>
 </form>
 </body></html>
+
+
+<form method="post" action="Modifier_client.php">
+    <table>
+
+
+ 
+
+    </table>
+</form>

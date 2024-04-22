@@ -110,6 +110,16 @@ class Vol{
 
     public function newVol(){
         $bdd = new Bdd();
+        $req=$bdd->getBdd()->query("SELECT id_avion FROM avion where matricule=:matricule");
+        $req->execute(array(
+            'matricule'=>$this->getRefAvion()
+        ));
+        $res=$req->fetchAll();
+        $req1=$bdd->getBdd()->query("SELECT id_pillot FROM pillot as p INNER JOIN user as u ON p.ref_user = u.id_user where nom=:nom");
+        $req1->execute(array(
+            'nom'=>$this->getRefPillot()
+        ));
+        $res1=$req->fetchAll();
         $inscription=$bdd->getBdd()->query("INSERT INTO vol(destination,ville_arriver,heure_depart,heure_arriver,ville_depart,prix,ref_avion,ref_pillot) VALUES (:destination,:ville,:heure_depart,:heure_arriver,:ville_depart,:prix,:ref_avion,:ref_pillot)");
         $inscription->execute(array(
             'destination'=>$this->getDestination(),
@@ -118,9 +128,8 @@ class Vol{
             'heure_arriver'=>$this->getHeureArriver(),
             'ville_depart'=>$this->getVilleDepart(),
             'prix'=>$this->getPrix(),
-            'ref_avion'=>$this->getRefAvion(),
-            'ref_aeroport'=>$this->getRefAeroport(),
-            'ref_pillot'=>$this->getRefPillot()
+            'ref_avion'=>$res['id_avion'],
+            'ref_pillot'=>$res1['id_pillot']
         ));
         header("Location: ../../vue/connection.html");
     }

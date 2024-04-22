@@ -2,6 +2,8 @@
 
 namespace modele;
 
+use Bdd;
+
 class Pillot extends Perssone {
     private $id_pillot;
     private $ref_compagnie;
@@ -188,6 +190,14 @@ class Pillot extends Perssone {
         $req=$bdd->getBdd()->query("SELECT * FROM vol WHERE ref_pillot = :ref");
         $req->execute(array(
             "ref"=>$this->getIdPillot()
+        ));
+        return $req->fetchAll();
+    }
+    public function pillotDispo(){
+        $bdd = new Bdd();
+        $req=$bdd->getBdd()->query("SELECT * FROM user where status = :s");
+        $req->execute(array(
+            's'=>"Pillot"
         ));
         return $req->fetchAll();
     }

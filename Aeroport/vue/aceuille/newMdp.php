@@ -73,8 +73,8 @@
 <form method="post" action="../../src/controleur/controleur.php">
     <table>
         <tr>
-            <td>Mot de Passe Actuel</td>
-            <td><input type="text" name="mdp_p"></td>
+            <td>Email</td>
+            <td><input type="text" name="email"></td>
         </tr>
         <tr>
             <td>Nouveau Mot de Passe</td>

@@ -63,7 +63,8 @@
                     <div class="collapse navbar-collapse js-navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
                             <li><a class="font_tag active_tag" href="Recherche.php">Rechercher Vol</a></li>
-                            <li><a class="font_tag active_tag" href="reserver.php.php">Reservation</a></li>
+                            <li><a class="font_tag active_tag" href="reserver.php">Reservation</a></li>
+                            <li><a class="font_tag active_tag" href="annulerReservation.php">Reservation</a></li>
                             <li><a class="font_tag active_tag" href="modif.php">Mon Compte</a></li>
                             <li><a class="font_tag active_tag" href="../../src/controleur/controleur.php">Deconnexion</a></li>
                         </ul>
@@ -75,11 +76,19 @@
     </div>
 </section>
 <form action="Reservation.php" method="post">
-<label for="recherche"></label><select name="id" id="recherche">
+
     <?php
+    include "../../src/bdd/Bdd.php";
+    include "../../src/modele/Perssone.php";
+    include "../../src/modele/Vol.php";
     $vol=new \modele\Vol();
     $matricule=$vol->listDestination();
-    echo var_dump($matricule);
+
+    ?>
+<label for="recherche"></label><select name="id" id="recherche">
+    <?php
+
+
     foreach($matricule as $element){
         echo "<a></a><option name='".$element[0]."'>".$element[1]."</option>";
     }
